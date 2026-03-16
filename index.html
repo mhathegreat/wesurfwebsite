@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeSurf | Watch Videos & Surf the Web Together</title>
+    <meta name="title" content="WeSurf | Watch Videos & Surf the Web Together">
+    <meta name="description" content="The ultimate watch party Chrome extension. Sync Netflix, YouTube, and surf the entire web in real-time with friends. Add to Chrome for free.">
+    <meta name="keywords" content="watch party, sync video, co-browse, netflix party alternative, youtube sync, watch movies together, shared browsing, chrome extension">
+    <meta name="author" content="WeSurf">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://wesurf.app/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wesurf.app/">
+    <meta property="og:title" content="WeSurf | Watch Videos & Surf the Web Together">
+    <meta property="og:description" content="The ultimate watch party Chrome extension. Sync Netflix, YouTube, and surf the entire web in real-time with friends.">
+    <meta property="og:image" content="social-preview.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090a0c;
+            --bg-card: rgba(28, 31, 35, 0.6);
+            --primary: #007bff;
+            --primary-light: #4dadff;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% -20%, rgba(77, 173, 255, 0.15), transparent 50%),
+                radial-gradient(circle at 100% 50%, rgba(0, 123, 255, 0.05), transparent 50%);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            background: rgba(9, 10, 12, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            background: linear-gradient(90deg, #ffffff, var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.2);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--text-main); }
+
+        .hero {
+            text-align: center;
+            padding: 160px 5% 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(77, 173, 255, 0.1);
+            border: 1px solid rgba(77, 173, 255, 0.2);
+            color: var(--primary-light);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            line-height: 1.05;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #0056b3 100%);
+            color: white;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 8px 30px rgba(0, 123, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset, 0 12px 40px rgba(0, 123, 255, 0.5);
+        }
+
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto 120px;
+            padding: 0 5%;
+        }
+
+        .browser-mockup {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #0f1113;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .browser-header {
+            background: #1c1f23;
+            padding: 12px 16px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .browser-content {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1c1f23 0%, #0f1113 100%);
+            color: var(--text-muted);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 5%;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            padding: 40px 32px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 24px;
+            background: rgba(77, 173, 255, 0.1);
+            width: 64px; height: 64px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 16px;
+            border: 1px solid rgba(77, 173, 255, 0.2);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="icon128.png" alt="WeSurf Logo" class="logo-img">
+            <span class="logo-text">WeSurf</span>
+        </a>
+        <a href="mailto:wesurfextension@gmail.com" class="nav-link">Contact Support</a>
+    </nav>
+
+    <main>
+        <header class="hero">
+            <div class="pill animate-up">✨ Now in Beta for Chrome</div>
+            <h1 class="animate-up delay-1">The whole internet,<br>now multiplayer.</h1>
+            <p class="animate-up delay-2">The ultimate watch party extension. Sync Netflix, YouTube, and surf the web in real-time with your friends across any website.</p>
+            <div class="animate-up delay-3">
+                <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" class="btn-primary">Add to Chrome — It's Free</a>
+            </div>
+        </header>
+
+        <section class="demo-container animate-up delay-3">
+            <div class="browser-mockup">
+                <div class="browser-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="browser-content">
+                    <span style="opacity: 0.5;">[ Cinematic App Demo Video ]</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card animate-up delay-1">
+                <div class="feature-icon">🌍</div>
+                <h3>Works Everywhere</h3>
+                <p>Not just Netflix. Play, pause, and seek videos in perfect harmony on virtually any HTML5 video player on the web.</p>
+            </div>
+            <div class="feature-card animate-up delay-2">
+                <div class="feature-icon">💬</div>
+                <h3>Integrated Chat</h3>
+                <p>A sleek chat sidebar injects directly into the webpage. Talk and react without ever switching tabs, even in fullscreen.</p>
+            </div>
+            <div class="feature-card animate-up delay-3">
+                <div class="feature-icon">🔗</div>
+                <h3>Instant Invites</h3>
+                <p>Generate a simple link, send it to your friends, and they will auto-join your private room the second they click it.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html" class="nav-link">Privacy Policy</a>
+            <a href="terms.html" class="nav-link">Terms of Service</a>
+        </div>
+        <p>&copy; 2026 WeSurf. Built for friends on the internet.</p>
+    </footer>
+
+</body>
+</html>

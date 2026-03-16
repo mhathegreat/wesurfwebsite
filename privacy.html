@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | WeSurf</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #090a0c; --bg-card: rgba(28, 31, 35, 0.6); --primary: #007bff; --primary-light: #4dadff; --text-main: #ffffff; --text-muted: #94a3b8; --border: rgba(255, 255, 255, 0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; background-image: radial-gradient(circle at 50% -20%, rgba(77, 173, 255, 0.15), transparent 50%); }
+        nav { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 16px 5%; background: rgba(9, 10, 12, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 100; }
+        .logo { font-size: 22px; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        .logo-text { background: linear-gradient(90deg, #ffffff, var(--primary-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo-img { width: 32px; height: 32px; border-radius: 8px; }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 14px; }
+        footer { border-top: 1px solid var(--border); padding: 40px 5%; text-align: center; color: var(--text-muted); font-size: 14px; margin-top: 80px; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="icon128.png" alt="WeSurf Logo" class="logo-img">
+            <span class="logo-text">WeSurf</span>
+        </a>
+        <a href="mailto:wesurfextension@gmail.com" class="nav-link">Contact Support</a>
+    </nav>
+
+    <main style="max-width: 800px; margin: 120px auto 100px; padding: 0 5%;">
+        <h1 style="font-size: 40px; margin-bottom: 24px;">Privacy Policy</h1>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">Last Updated: March 2026</p>
+
+        <div style="color: var(--text-muted); font-size: 16px; line-height: 1.8;">
+            <h2 style="color: var(--text-main); font-size: 24px; margin: 32px 0 16px;">1. Introduction</h2>
+            <p style="margin-bottom: 16px;">Welcome to WeSurf ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we handle your data when you use the WeSurf Chrome Extension.</p>
+
+            <h2 style="color: var(--text-main); font-size: 24px; margin: 32px 0 16px;">2. The Data We Collect</h2>
+            <p style="margin-bottom: 16px;">WeSurf is designed to be as privacy-focused as possible. We only collect the data absolutely necessary to provide our core service (synchronized browsing and video playback).</p>
+            <ul style="margin-bottom: 16px; padding-left: 20px;">
+                <li style="margin-bottom: 8px;"><strong>Account Information:</strong> If you choose to log in via Google, we securely receive your email address, name, and profile picture to display in your chat rooms.</li>
+                <li style="margin-bottom: 8px;"><strong>Temporary Browsing Data:</strong> To sync your session with friends, we temporarily process the URL of the active tab and video playback states (timestamp, play/pause). <strong>We do not track your background browsing history.</strong> This data is only processed for the active tab where WeSurf is explicitly enabled.</li>
+                <li style="margin-bottom: 8px;"><strong>Chat Messages:</strong> Messages sent in WeSurf rooms are routed through our secure WebSockets to reach your friends. We do not permanently store your chat history.</li>
+            </ul>
+
+            <h2 style="color: var(--text-main); font-size: 24px; margin: 32px 0 16px;">3. Chrome Permissions Justification</h2>
+            <p style="margin-bottom: 16px;">To function, WeSurf requires certain permissions. Here is exactly why we need them:</p>
+            <ul style="margin-bottom: 16px; padding-left: 20px;">
+                <li style="margin-bottom: 8px;"><strong>Read and change all your data on all websites (all_urls):</strong> Required to inject the chat sidebar and sync video state across any website you choose to watch with friends.</li>
+                <li style="margin-bottom: 8px;"><strong>Storage:</strong> Required to save your display name, avatar choice, and active room ID locally on your device.</li>
+            </ul>
+
+            <h2 style="color: var(--text-main); font-size: 24px; margin: 32px 0 16px;">4. Data Sharing</h2>
+            <p style="margin-bottom: 16px;">We do not sell, rent, or trade your personal information to third parties. We never will.</p>
+
+            <h2 style="color: var(--text-main); font-size: 24px; margin: 32px 0 16px;">5. Contact Us</h2>
+            <p style="margin-bottom: 16px;">If you have any questions regarding this Privacy Policy, please contact us at: <a href="mailto:wesurf.app@gmail.com" style="color: var(--primary-light);">wesurf.app@gmail.com</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="privacy.html" class="nav-link">Privacy Policy</a>
+            <a href="terms.html" class="nav-link">Terms of Service</a>
+        </div>
+        <p>&copy; 2026 WeSurf.</p>
+    </footer>
+
+</body>
+</html>
