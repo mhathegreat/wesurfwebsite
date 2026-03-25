@@ -287,39 +287,304 @@
             padding: 0 5%;
         }
 
-        .browser-mockup {
+        /* Mockup */
+        .mockup-wrapper {
             width: 100%;
-            aspect-ratio: 16/9;
-            background: #0f1113;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-            display: flex;
-            flex-direction: column;
+            border-radius: 16px;
             overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05), 0 0 60px rgba(0,123,255,0.08);
             animation: float 6s ease-in-out infinite;
+            background: #0f1113;
         }
 
-        .browser-header {
+        .mockup-topbar {
             background: #1c1f23;
-            padding: 12px 16px;
+            padding: 10px 16px;
             display: flex;
-            gap: 8px;
+            align-items: center;
+            gap: 12px;
             border-bottom: 1px solid var(--border);
         }
 
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
         .dot.red { background: #ff5f56; }
         .dot.yellow { background: #ffbd2e; }
         .dot.green { background: #27c93f; }
 
-        .browser-content {
-            flex-grow: 1;
+        .mockup-urlbar {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mockup-urlbar-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #27c93f;
+            flex-shrink: 0;
+        }
+
+        .mockup-body {
+            display: flex;
+            height: 380px;
+        }
+
+        @media (max-width: 600px) {
+            .mockup-body { height: 280px; }
+        }
+
+        /* Left: video player area */
+        .mockup-player {
+            flex: 1;
+            background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, #1c1f23 0%, #0f1113 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-player-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0d1117 0%, #111827 50%, #0d1117 100%);
+        }
+
+        .mockup-cinematic-bars {
+            position: absolute;
+            left: 0; right: 0;
+            height: 40px;
+            background: #000;
+            z-index: 2;
+        }
+        .mockup-cinematic-bars.top { top: 0; }
+        .mockup-cinematic-bars.bottom { bottom: 0; }
+
+        .mockup-play-btn {
+            position: relative;
+            z-index: 3;
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.12);
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .mockup-play-btn::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent rgba(255,255,255,0.9);
+            margin-left: 4px;
+        }
+
+        .mockup-progress {
+            position: absolute;
+            bottom: 48px;
+            left: 16px; right: 16px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mockup-progress-bar {
+            height: 3px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .mockup-progress-fill {
+            height: 100%;
+            width: 38%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 4px;
+        }
+
+        .mockup-time {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .mockup-viewers {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,0,0,0.55);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 5px 10px 5px 6px;
+        }
+
+        .mockup-avatars {
+            display: flex;
+        }
+
+        .mockup-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #0f1113;
+            margin-right: -6px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .mockup-viewers-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+            padding-left: 10px;
+        }
+
+        /* Right: chat sidebar */
+        .mockup-sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            background: #13161a;
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .mockup-sidebar { width: 130px; }
+        }
+
+        .mockup-sidebar-header {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mockup-sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mockup-live-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #27c93f;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .mockup-online-count {
+            font-size: 10px;
             color: var(--text-muted);
+        }
+
+        .mockup-messages {
+            flex: 1;
+            padding: 10px 10px 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .mockup-msg {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .mockup-msg.show {
+            animation: msgIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mockup-msg-author {
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .mockup-msg-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            background: rgba(255,255,255,0.04);
+            border-radius: 6px;
+            padding: 5px 8px;
+        }
+
+        .mockup-typing {
+            padding: 6px 10px;
+            font-size: 10px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mockup-typing.show { opacity: 1; }
+
+        .typing-dots span {
+            display: inline-block;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: typingBounce 1.2s ease-in-out infinite;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+
+        .mockup-input {
+            margin: 0 10px 10px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 7px 10px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
         }
 
         .features {
@@ -527,14 +792,80 @@
         </header>
 
         <section class="demo-container animate-up delay-3">
-            <div class="browser-mockup">
-                <div class="browser-header">
+            <div class="mockup-wrapper">
+                <!-- Top bar -->
+                <div class="mockup-topbar">
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
+                    <div class="mockup-urlbar">
+                        <div class="mockup-urlbar-dot"></div>
+                        netflix.com/watch/...
+                    </div>
                 </div>
-                <div class="browser-content">
-                    <span style="opacity: 0.5;">[ Cinematic App Demo Video ]</span>
+                <!-- Body -->
+                <div class="mockup-body">
+                    <!-- Video player -->
+                    <div class="mockup-player">
+                        <div class="mockup-player-bg"></div>
+                        <div class="mockup-cinematic-bars top"></div>
+                        <div class="mockup-cinematic-bars bottom"></div>
+                        <!-- Watching indicator -->
+                        <div class="mockup-viewers">
+                            <div class="mockup-avatars">
+                                <div class="mockup-avatar" style="background:#2563eb;">Y</div>
+                                <div class="mockup-avatar" style="background:#7c3aed;">A</div>
+                                <div class="mockup-avatar" style="background:#059669;">M</div>
+                            </div>
+                            <span class="mockup-viewers-label">3 watching</span>
+                        </div>
+                        <div class="mockup-play-btn"></div>
+                        <div class="mockup-progress">
+                            <div class="mockup-progress-bar">
+                                <div class="mockup-progress-fill"></div>
+                            </div>
+                            <span class="mockup-time">24:11 / 1:02:38</span>
+                        </div>
+                    </div>
+                    <!-- Chat sidebar -->
+                    <div class="mockup-sidebar">
+                        <div class="mockup-sidebar-header">
+                            <div class="mockup-sidebar-title">
+                                <div class="mockup-live-dot"></div>
+                                WeSurf Chat
+                            </div>
+                            <div class="mockup-online-count">3 online</div>
+                        </div>
+                        <div class="mockup-messages" id="mockupMessages">
+                            <div class="mockup-msg" id="msg1">
+                                <span class="mockup-msg-author" style="color:#4dadff;">You</span>
+                                <div class="mockup-msg-text">anyone else think this movie is insane 😭</div>
+                            </div>
+                            <div class="mockup-msg" id="msg2">
+                                <span class="mockup-msg-author" style="color:#a78bfa;">Alex</span>
+                                <div class="mockup-msg-text">YES I was not expecting that twist</div>
+                            </div>
+                            <div class="mockup-msg" id="msg3">
+                                <span class="mockup-msg-author" style="color:#34d399;">Mia</span>
+                                <div class="mockup-msg-text">lmaooo same 💀</div>
+                            </div>
+                            <div class="mockup-msg" id="msg4">
+                                <span class="mockup-msg-author" style="color:#4dadff;">You</span>
+                                <div class="mockup-msg-text">wait go back 30 sec</div>
+                            </div>
+                            <div class="mockup-msg" id="msg5">
+                                <span class="mockup-msg-author" style="color:#a78bfa;">Alex</span>
+                                <div class="mockup-msg-text">I gotchu ⏪</div>
+                            </div>
+                        </div>
+                        <div class="mockup-typing" id="mockupTyping">
+                            <span>Mia is typing</span>
+                            <span class="typing-dots">
+                                <span></span><span></span><span></span>
+                            </span>
+                        </div>
+                        <div class="mockup-input">Message...</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -611,6 +942,34 @@
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Animate chat messages in sequence, then loop
+        function animateChat() {
+            const msgs = document.querySelectorAll('.mockup-msg');
+            const typing = document.getElementById('mockupTyping');
+            msgs.forEach(m => { m.classList.remove('show'); m.style.opacity = 0; });
+            typing.classList.remove('show');
+
+            let delays = [400, 1200, 2000, 2900, 3700];
+            msgs.forEach((msg, i) => {
+                setTimeout(() => msg.classList.add('show'), delays[i]);
+            });
+            // Show typing before last message
+            setTimeout(() => typing.classList.add('show'), 3200);
+            setTimeout(() => typing.classList.remove('show'), 3700);
+            // Loop after all shown
+            setTimeout(animateChat, 6500);
+        }
+
+        // Start after mockup scrolls into view
+        const mockupEl = document.querySelector('.mockup-wrapper');
+        const mockupObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateChat();
+                mockupObserver.disconnect();
+            }
+        }, { threshold: 0.3 });
+        mockupObserver.observe(mockupEl);
     </script>
 </body>
 </html>
