@@ -261,6 +261,24 @@
             transition: all 0.3s ease;
         }
 
+        .feature-card:hover {
+            border-color: rgba(77, 173, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(77, 173, 255, 0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
         .feature-icon {
             font-size: 36px;
             margin-bottom: 24px;
@@ -269,7 +287,128 @@
             display: flex; align-items: center; justify-content: center;
             border-radius: 16px;
             border: 1px solid rgba(77, 173, 255, 0.2);
+            transition: all 0.3s ease;
         }
+
+        .feature-card:hover .feature-icon {
+            background: rgba(77, 173, 255, 0.18);
+            border-color: rgba(77, 173, 255, 0.4);
+        }
+
+        /* How it works */
+        .how-section {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 0 5%;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-light);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 64px;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 48px;
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #0056b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.35);
+            flex-shrink: 0;
+        }
+
+        .step h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Bottom CTA */
+        .cta-section {
+            max-width: 700px;
+            margin: 0 auto 100px;
+            padding: 64px 5%;
+            text-align: center;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 36px;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
 
         footer {
             border-top: 1px solid var(--border);
@@ -321,21 +460,55 @@
         </section>
 
         <section class="features">
-            <div class="feature-card animate-up delay-1">
+            <div class="feature-card reveal reveal-delay-1">
                 <div class="feature-icon">🌍</div>
                 <h3>Works Everywhere</h3>
                 <p>Not just Netflix. Play, pause, and seek videos in perfect harmony on virtually any HTML5 video player on the web.</p>
             </div>
-            <div class="feature-card animate-up delay-2">
+            <div class="feature-card reveal reveal-delay-2">
                 <div class="feature-icon">💬</div>
                 <h3>Integrated Chat</h3>
                 <p>A sleek chat sidebar injects directly into the webpage. Talk and react without ever switching tabs, even in fullscreen.</p>
             </div>
-            <div class="feature-card animate-up delay-3">
+            <div class="feature-card reveal reveal-delay-3">
                 <div class="feature-icon">🔗</div>
                 <h3>Instant Invites</h3>
                 <p>Generate a simple link, send it to your friends, and they will auto-join your private room the second they click it.</p>
             </div>
+        </section>
+
+        <section class="how-section">
+            <p class="section-label reveal">How it works</p>
+            <h2 class="section-title reveal">Up and running in 30 seconds</h2>
+            <div class="steps">
+                <div class="step reveal reveal-delay-1">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4>Install WeSurf</h4>
+                        <p>Add the extension to Chrome in one click. No account required.</p>
+                    </div>
+                </div>
+                <div class="step reveal reveal-delay-2">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4>Share your link</h4>
+                        <p>Click the WeSurf icon to create a room and send the invite link to your friends.</p>
+                    </div>
+                </div>
+                <div class="step reveal reveal-delay-3">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4>Surf together</h4>
+                        <p>Everyone's browser stays in sync. Watch, browse, and chat in real-time.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section reveal">
+            <h2>Ready to surf together?</h2>
+            <p>Free forever. No account needed. Just install and invite your friends.</p>
+            <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" class="btn-primary">Add to Chrome — It's Free</a>
         </section>
     </main>
 
@@ -347,5 +520,17 @@
         <p>&copy; 2026 WeSurf. Built for friends on the internet.</p>
     </footer>
 
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
