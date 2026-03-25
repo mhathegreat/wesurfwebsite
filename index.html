@@ -287,304 +287,489 @@
             padding: 0 5%;
         }
 
-        /* Mockup */
+        /* ── Mockup ── */
         .mockup-wrapper {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid var(--border);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05), 0 0 60px rgba(0,123,255,0.08);
-            animation: float 6s ease-in-out infinite;
-            background: #0f1113;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 60px rgba(0,123,255,0.07);
+            background: #000;
+            position: relative;
         }
 
+        /* browser chrome */
         .mockup-topbar {
-            background: #1c1f23;
-            padding: 10px 16px;
+            background: #1a1a1a;
+            padding: 9px 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid var(--border);
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
-        .dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
-        .dot.red { background: #ff5f56; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .dot.red    { background: #ff5f56; }
         .dot.yellow { background: #ffbd2e; }
-        .dot.green { background: #27c93f; }
+        .dot.green  { background: #27c93f; }
 
         .mockup-urlbar {
             flex: 1;
-            background: rgba(255,255,255,0.05);
-            border-radius: 6px;
-            padding: 5px 12px;
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 5px;
+            padding: 4px 10px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
         }
 
-        .mockup-urlbar-dot {
-            width: 7px; height: 7px; border-radius: 50%;
-            background: #27c93f;
-            flex-shrink: 0;
-        }
-
-        .mockup-body {
-            display: flex;
-            height: 380px;
-        }
-
-        @media (max-width: 600px) {
-            .mockup-body { height: 280px; }
-        }
-
-        /* Left: video player area */
-        .mockup-player {
-            flex: 1;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* video area */
+        .mockup-video {
             position: relative;
+            width: 100%;
+            background: #000;
+            aspect-ratio: 16/9;
             overflow: hidden;
         }
 
-        .mockup-player-bg {
+        /* subtle film grain feel */
+        .mockup-video-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #0d1117 0%, #111827 50%, #0d1117 100%);
+            background: radial-gradient(ellipse at 30% 40%, #111 0%, #000 70%);
         }
 
-        .mockup-cinematic-bars {
+        /* Netflix-style bottom gradient */
+        .mockup-bottom-gradient {
             position: absolute;
-            left: 0; right: 0;
-            height: 40px;
-            background: #000;
-            z-index: 2;
-        }
-        .mockup-cinematic-bars.top { top: 0; }
-        .mockup-cinematic-bars.bottom { bottom: 0; }
-
-        .mockup-play-btn {
-            position: relative;
-            z-index: 3;
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.12);
-            border: 2px solid rgba(255,255,255,0.25);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
+            bottom: 0; left: 0; right: 0;
+            height: 35%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+            pointer-events: none;
         }
 
-        .mockup-play-btn::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent rgba(255,255,255,0.9);
-            margin-left: 4px;
-        }
-
-        .mockup-progress {
+        /* top-left back arrow */
+        .mockup-back {
             position: absolute;
-            bottom: 48px;
-            left: 16px; right: 16px;
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .mockup-progress-bar {
-            height: 3px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .mockup-progress-fill {
-            height: 100%;
-            width: 38%;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            border-radius: 4px;
-        }
-
-        .mockup-time {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .mockup-viewers {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0,0,0,0.55);
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 5px 10px 5px 6px;
-        }
-
-        .mockup-avatars {
-            display: flex;
-        }
-
-        .mockup-avatar {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 1px solid #0f1113;
-            margin-right: -6px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .mockup-viewers-label {
-            font-size: 11px;
+            top: 14px; left: 16px;
             color: rgba(255,255,255,0.7);
-            font-weight: 600;
-            padding-left: 10px;
+            font-size: 18px;
+            z-index: 4;
         }
 
-        /* Right: chat sidebar */
-        .mockup-sidebar {
-            width: 200px;
-            flex-shrink: 0;
-            background: #13161a;
-            border-left: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        /* progress bar */
+        .mockup-progressbar {
+            position: absolute;
+            bottom: 42px;
+            left: 0; right: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            z-index: 4;
         }
 
-        @media (max-width: 600px) {
-            .mockup-sidebar { width: 130px; }
+        .mockup-progressbar-fill {
+            height: 100%;
+            width: 22%;
+            background: #e50914;
+            position: relative;
         }
 
-        .mockup-sidebar-header {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--border);
+        .mockup-progressbar-fill::after {
+            content: '';
+            position: absolute;
+            right: -5px; top: -4px;
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            background: #e50914;
+        }
+
+        /* bottom controls bar */
+        .mockup-controls {
+            position: absolute;
+            bottom: 10px; left: 14px; right: 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            z-index: 4;
         }
 
-        .mockup-sidebar-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-main);
+        .mockup-ctrl-left {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 12px;
+            color: rgba(255,255,255,0.85);
+            font-size: 13px;
         }
 
-        .mockup-live-dot {
-            width: 6px; height: 6px;
+        .mockup-ctrl-center {
+            font-size: 10px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .mockup-ctrl-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+        }
+
+        .mockup-timestamp {
+            position: absolute;
+            bottom: 10px; right: 14px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            z-index: 4;
+        }
+
+        /* ── Floating WeSurf panel ── */
+        .mockup-panel {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 175px;
+            background: #1a1c20;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 10;
+            font-size: 11px;
+        }
+
+        @media (max-width: 640px) {
+            .mockup-panel { width: 130px; }
+        }
+
+        /* panel header */
+        .mockup-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .mockup-panel-logo {
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .mockup-beta-badge {
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.6);
+            font-size: 8px;
+            font-weight: 700;
+            padding: 1px 5px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-panel-actions {
+            display: flex;
+            gap: 4px;
+            margin-left: auto;
+        }
+
+        .mockup-btn-share {
+            background: #2563eb;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        .mockup-btn-leave {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+
+        /* panel avatar row */
+        .mockup-panel-avatars {
+            display: flex;
+            gap: 4px;
+            padding: 7px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .mpav {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            font-size: 13px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid #1a1c20;
+        }
+
+        /* tabs */
+        .mockup-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .mockup-tab {
+            flex: 1;
+            text-align: center;
+            padding: 6px 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.4);
+            position: relative;
+        }
+
+        .mockup-tab.active {
+            color: #fff;
+        }
+
+        .mockup-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 20%; right: 20%;
+            height: 2px;
+            background: #2563eb;
+            border-radius: 2px 2px 0 0;
+        }
+
+        /* emoji reaction row */
+        .mockup-reactions {
+            display: flex;
+            gap: 3px;
+            padding: 6px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            justify-content: space-between;
+        }
+
+        .mockup-reactions span { font-size: 13px; cursor: pointer; }
+
+        /* voice section */
+        .mockup-voice {
+            padding: 6px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .mockup-voice-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 6px;
+        }
+
+        .mockup-voice-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.8px;
+        }
+
+        .mockup-voice-dot {
+            width: 5px; height: 5px;
             border-radius: 50%;
             background: #27c93f;
             animation: pulse-dot 2s ease-in-out infinite;
         }
 
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
+        .mockup-voice-count {
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
         }
 
-        .mockup-online-count {
-            font-size: 10px;
-            color: var(--text-muted);
+        .mockup-voice-btns {
+            display: flex;
+            gap: 4px;
+            margin-left: auto;
         }
 
+        .mockup-voice-header .mockup-voice-btns {
+            margin-left: auto;
+        }
+
+        .mockup-btn-unmute {
+            background: rgba(37,99,235,0.7);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .mockup-btn-vleave {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 8px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .mockup-voice-users {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mockup-voice-user {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .mockup-voice-avatar {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid rgba(255,255,255,0.1);
+        }
+
+        .mockup-voice-name {
+            font-size: 8px;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* chat messages */
         .mockup-messages {
             flex: 1;
-            padding: 10px 10px 6px;
+            padding: 8px 8px 4px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            overflow: hidden;
+            gap: 8px;
+            min-height: 100px;
         }
 
-        .mockup-msg {
+        /* "You" bubble — right aligned blue */
+        .mockup-msg-self {
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            justify-content: flex-end;
             opacity: 0;
-            transform: translateY(8px);
         }
 
-        .mockup-msg.show {
-            animation: msgIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .mockup-msg-self.show {
+            animation: msgIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .mockup-bubble-self {
+            background: #2563eb;
+            color: #fff;
+            font-size: 10px;
+            padding: 5px 9px;
+            border-radius: 12px 12px 3px 12px;
+            max-width: 85%;
+            line-height: 1.4;
+        }
+
+        /* Others — left aligned with avatar */
+        .mockup-msg-other {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            opacity: 0;
+        }
+
+        .mockup-msg-other.show {
+            animation: msgIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+
+        .mockup-msg-av {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .mockup-msg-content { display: flex; flex-direction: column; gap: 2px; }
+
+        .mockup-msg-name {
+            font-size: 8px;
+            color: rgba(255,255,255,0.4);
+            padding-left: 2px;
+        }
+
+        .mockup-bubble-other {
+            background: #2a2d33;
+            color: rgba(255,255,255,0.9);
+            font-size: 10px;
+            padding: 5px 9px;
+            border-radius: 12px 12px 12px 3px;
+            max-width: 85%;
+            line-height: 1.4;
         }
 
         @keyframes msgIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .mockup-msg-author {
-            font-size: 10px;
-            font-weight: 700;
-        }
-
-        .mockup-msg-text {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.4;
-            background: rgba(255,255,255,0.04);
-            border-radius: 6px;
-            padding: 5px 8px;
-        }
-
+        /* typing indicator */
         .mockup-typing {
-            padding: 6px 10px;
-            font-size: 10px;
-            color: var(--text-muted);
+            padding: 0 8px 4px;
+            font-size: 9px;
+            color: rgba(255,255,255,0.35);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             opacity: 0;
             transition: opacity 0.3s;
+            height: 18px;
         }
 
         .mockup-typing.show { opacity: 1; }
 
         .typing-dots span {
             display: inline-block;
-            width: 4px; height: 4px;
+            width: 3px; height: 3px;
             border-radius: 50%;
-            background: var(--text-muted);
+            background: rgba(255,255,255,0.4);
             animation: typingBounce 1.2s ease-in-out infinite;
         }
-
         .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
         .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
         @keyframes typingBounce {
             0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-4px); }
+            30% { transform: translateY(-3px); }
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.4; }
+        }
+
+        /* message input */
+        .mockup-input-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 8px 8px;
+            border-top: 1px solid rgba(255,255,255,0.07);
         }
 
         .mockup-input {
-            margin: 0 10px 10px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 7px 10px;
-            font-size: 11px;
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            border-radius: 7px;
+            padding: 5px 8px;
+            font-size: 10px;
             color: rgba(255,255,255,0.25);
+        }
+
+        .mockup-send {
+            width: 22px; height: 22px;
+            background: #2563eb;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: 10px;
         }
 
         .features {
@@ -793,78 +978,135 @@
 
         <section class="demo-container animate-up delay-3">
             <div class="mockup-wrapper">
-                <!-- Top bar -->
+                <!-- Browser chrome -->
                 <div class="mockup-topbar">
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <div class="mockup-urlbar">
-                        <div class="mockup-urlbar-dot"></div>
-                        netflix.com/watch/...
-                    </div>
+                    <div class="mockup-urlbar">netflix.com/watch/brooklyn-nine-nine</div>
                 </div>
-                <!-- Body -->
-                <div class="mockup-body">
-                    <!-- Video player -->
-                    <div class="mockup-player">
-                        <div class="mockup-player-bg"></div>
-                        <div class="mockup-cinematic-bars top"></div>
-                        <div class="mockup-cinematic-bars bottom"></div>
-                        <!-- Watching indicator -->
-                        <div class="mockup-viewers">
-                            <div class="mockup-avatars">
-                                <div class="mockup-avatar" style="background:#2563eb;">Y</div>
-                                <div class="mockup-avatar" style="background:#7c3aed;">A</div>
-                                <div class="mockup-avatar" style="background:#059669;">M</div>
-                            </div>
-                            <span class="mockup-viewers-label">3 watching</span>
+
+                <!-- Video area -->
+                <div class="mockup-video">
+                    <div class="mockup-video-bg"></div>
+                    <div class="mockup-bottom-gradient"></div>
+
+                    <!-- Back arrow -->
+                    <div class="mockup-back">←</div>
+
+                    <!-- Progress bar -->
+                    <div class="mockup-progressbar">
+                        <div class="mockup-progressbar-fill"></div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="mockup-controls">
+                        <div class="mockup-ctrl-left">
+                            <span>⏸</span>
+                            <span style="font-size:11px">↺10</span>
+                            <span style="font-size:11px">10↻</span>
+                            <span style="font-size:11px">🔊</span>
                         </div>
-                        <div class="mockup-play-btn"></div>
-                        <div class="mockup-progress">
-                            <div class="mockup-progress-bar">
-                                <div class="mockup-progress-fill"></div>
-                            </div>
-                            <span class="mockup-time">24:11 / 1:02:38</span>
+                        <div class="mockup-ctrl-center">Brooklyn Nine-Nine &nbsp;E5 &nbsp;Halloween IV</div>
+                        <div class="mockup-ctrl-right">
+                            <span>⏭</span><span>⊞</span><span>CC</span><span>⛶</span>
                         </div>
                     </div>
-                    <!-- Chat sidebar -->
-                    <div class="mockup-sidebar">
-                        <div class="mockup-sidebar-header">
-                            <div class="mockup-sidebar-title">
-                                <div class="mockup-live-dot"></div>
-                                WeSurf Chat
-                            </div>
-                            <div class="mockup-online-count">3 online</div>
-                        </div>
-                        <div class="mockup-messages" id="mockupMessages">
-                            <div class="mockup-msg" id="msg1">
-                                <span class="mockup-msg-author" style="color:#4dadff;">You</span>
-                                <div class="mockup-msg-text">anyone else think this movie is insane 😭</div>
-                            </div>
-                            <div class="mockup-msg" id="msg2">
-                                <span class="mockup-msg-author" style="color:#a78bfa;">Alex</span>
-                                <div class="mockup-msg-text">YES I was not expecting that twist</div>
-                            </div>
-                            <div class="mockup-msg" id="msg3">
-                                <span class="mockup-msg-author" style="color:#34d399;">Mia</span>
-                                <div class="mockup-msg-text">lmaooo same 💀</div>
-                            </div>
-                            <div class="mockup-msg" id="msg4">
-                                <span class="mockup-msg-author" style="color:#4dadff;">You</span>
-                                <div class="mockup-msg-text">wait go back 30 sec</div>
-                            </div>
-                            <div class="mockup-msg" id="msg5">
-                                <span class="mockup-msg-author" style="color:#a78bfa;">Alex</span>
-                                <div class="mockup-msg-text">I gotchu ⏪</div>
+
+                    <!-- Timestamp -->
+                    <div class="mockup-timestamp">20:37</div>
+
+                    <!-- ── WeSurf floating panel ── -->
+                    <div class="mockup-panel" id="mockupPanel">
+                        <!-- Header -->
+                        <div class="mockup-panel-header">
+                            <span class="mockup-panel-logo">WeSurf</span>
+                            <span class="mockup-beta-badge">BETA</span>
+                            <div class="mockup-panel-actions">
+                                <div class="mockup-btn-share">⬆ Share</div>
+                                <div class="mockup-btn-leave">Leave</div>
                             </div>
                         </div>
+
+                        <!-- Avatar row -->
+                        <div class="mockup-panel-avatars">
+                            <div class="mpav">🧑</div>
+                            <div class="mpav">👩</div>
+                            <div class="mpav">🧔</div>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="mockup-tabs">
+                            <div class="mockup-tab active">💬 Chat</div>
+                            <div class="mockup-tab">⚙ Settings</div>
+                        </div>
+
+                        <!-- Reactions -->
+                        <div class="mockup-reactions">
+                            <span>🔥</span><span>❤️</span><span>💀</span>
+                            <span>🎉</span><span>😂</span><span>😮</span><span>👏</span>
+                        </div>
+
+                        <!-- Voice section -->
+                        <div class="mockup-voice">
+                            <div class="mockup-voice-header">
+                                <span class="mockup-voice-label">VOICE</span>
+                                <div class="mockup-voice-dot"></div>
+                                <span class="mockup-voice-count">3 in call</span>
+                                <div class="mockup-voice-btns">
+                                    <div class="mockup-btn-unmute">Unmute</div>
+                                    <div class="mockup-btn-vleave">Leave</div>
+                                </div>
+                            </div>
+                            <div class="mockup-voice-users">
+                                <div class="mockup-voice-user">
+                                    <div class="mockup-voice-avatar">🧑</div>
+                                    <span class="mockup-voice-name">Jordan</span>
+                                </div>
+                                <div class="mockup-voice-user">
+                                    <div class="mockup-voice-avatar">👩</div>
+                                    <span class="mockup-voice-name">You</span>
+                                </div>
+                                <div class="mockup-voice-user">
+                                    <div class="mockup-voice-avatar">🧔</div>
+                                    <span class="mockup-voice-name">Rhonda</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Messages -->
+                        <div class="mockup-messages">
+                            <div class="mockup-msg-self" id="msg1">
+                                <div class="mockup-bubble-self">I love this show 😂</div>
+                            </div>
+                            <div class="mockup-msg-other" id="msg2">
+                                <div class="mockup-msg-av">🧑</div>
+                                <div class="mockup-msg-content">
+                                    <span class="mockup-msg-name">Jordan</span>
+                                    <div class="mockup-bubble-other">He is so funny!</div>
+                                </div>
+                            </div>
+                            <div class="mockup-msg-other" id="msg3">
+                                <div class="mockup-msg-av">🧔</div>
+                                <div class="mockup-msg-content">
+                                    <span class="mockup-msg-name">Rhonda</span>
+                                    <div class="mockup-bubble-other">Same 🔥</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Typing -->
                         <div class="mockup-typing" id="mockupTyping">
-                            <span>Mia is typing</span>
-                            <span class="typing-dots">
-                                <span></span><span></span><span></span>
-                            </span>
+                            Jordan is typing
+                            <span class="typing-dots"><span></span><span></span><span></span></span>
                         </div>
-                        <div class="mockup-input">Message...</div>
+
+                        <!-- Input -->
+                        <div class="mockup-input-row">
+                            <div class="mockup-input">Message...</div>
+                            <div style="font-size:12px">😊</div>
+                            <div class="mockup-send">➤</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -945,30 +1187,27 @@
 
         // Animate chat messages in sequence, then loop
         function animateChat() {
-            const msgs = document.querySelectorAll('.mockup-msg');
+            const msg1 = document.getElementById('msg1');
+            const msg2 = document.getElementById('msg2');
+            const msg3 = document.getElementById('msg3');
             const typing = document.getElementById('mockupTyping');
-            msgs.forEach(m => { m.classList.remove('show'); m.style.opacity = 0; });
+            [msg1, msg2, msg3].forEach(m => m.classList.remove('show'));
             typing.classList.remove('show');
 
-            let delays = [400, 1200, 2000, 2900, 3700];
-            msgs.forEach((msg, i) => {
-                setTimeout(() => msg.classList.add('show'), delays[i]);
-            });
-            // Show typing before last message
-            setTimeout(() => typing.classList.add('show'), 3200);
-            setTimeout(() => typing.classList.remove('show'), 3700);
-            // Loop after all shown
-            setTimeout(animateChat, 6500);
+            setTimeout(() => msg1.classList.add('show'), 500);
+            setTimeout(() => msg2.classList.add('show'), 1400);
+            setTimeout(() => typing.classList.add('show'), 2200);
+            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 3000);
+            setTimeout(animateChat, 6000);
         }
 
-        // Start after mockup scrolls into view
         const mockupEl = document.querySelector('.mockup-wrapper');
         const mockupObserver = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 animateChat();
                 mockupObserver.disconnect();
             }
-        }, { threshold: 0.3 });
+        }, { threshold: 0.2 });
         mockupObserver.observe(mockupEl);
     </script>
 </body>
