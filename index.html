@@ -287,6 +287,104 @@
             padding: 0 5%;
         }
 
+        /* ── Platform logos ── */
+        .platforms {
+            text-align: center;
+            padding: 0 5% 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .platforms-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .platforms-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 28px 40px;
+        }
+
+        .platform-logo {
+            opacity: 0.35;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .platform-logo:hover { opacity: 0.7; }
+
+        .platform-logo svg { display: block; }
+
+        /* ── FAQ ── */
+        .faq-section {
+            max-width: 720px;
+            margin: 0 auto 100px;
+            padding: 0 5%;
+        }
+
+        .faq-section .section-label,
+        .faq-section .section-title {
+            text-align: center;
+        }
+
+        .faq-section .section-title { margin-bottom: 40px; }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .faq-question:hover { color: var(--primary-light); }
+
+        .faq-chevron {
+            flex-shrink: 0;
+            width: 18px; height: 18px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+
+        .faq-item.open .faq-answer { max-height: 200px; }
+
+        .faq-answer p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            padding-bottom: 20px;
+        }
+
         /* ── Screenshots showcase ── */
         .screenshots-section {
             max-width: 1100px;
@@ -890,7 +988,7 @@
             <img src="icon128.png" alt="WeSurf Logo" class="logo-img">
             <span class="logo-text">WeSurf</span>
         </a>
-        <a href="mailto:hello@wesurf.live" class="nav-link">Contact Support</a>
+        <a href="mailto:websurfextension@gmail.com" class="nav-link">Contact Support</a>
     </nav>
 
     <main>
@@ -902,6 +1000,63 @@
                 <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Add to Chrome — It's Free</a>
             </div>
         </header>
+
+        <div class="platforms animate-up delay-3">
+            <p class="platforms-label">Works on your favourite sites</p>
+            <div class="platforms-row">
+                <!-- Netflix -->
+                <div class="platform-logo">
+                    <svg width="80" height="22" viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h13.5v30H0zM97.5 0H111v30H97.5z" fill="#E50914"/>
+                        <path d="M13.5 0h84v30h-84z" fill="#E50914"/>
+                        <text x="4" y="23" font-family="Arial Black, Arial" font-weight="900" font-size="22" fill="white" letter-spacing="-0.5">NETFLIX</text>
+                    </svg>
+                </div>
+                <!-- YouTube -->
+                <div class="platform-logo">
+                    <svg width="90" height="20" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="2" width="28" height="16" rx="4" fill="#FF0000"/>
+                        <polygon points="11,6 11,14 20,10" fill="white"/>
+                        <text x="32" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="white">YouTube</text>
+                    </svg>
+                </div>
+                <!-- Disney+ -->
+                <div class="platform-logo">
+                    <svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="15" fill="#0063e5">Disney</text>
+                        <text x="58" y="13" font-family="Arial Black, Arial" font-weight="900" font-size="18" fill="#0063e5">+</text>
+                    </svg>
+                </div>
+                <!-- Prime Video -->
+                <div class="platform-logo">
+                    <svg width="105" height="20" viewBox="0 0 105 20" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="15" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="white">prime </text>
+                        <text x="42" y="15" font-family="Arial, sans-serif" font-weight="400" font-size="13" fill="white">video</text>
+                        <path d="M0 18 Q52 23 104 18" stroke="#00A8E1" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </div>
+                <!-- Twitch -->
+                <div class="platform-logo">
+                    <svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 2h6v8H3zm8 0h6v8h-6z" fill="#9147FF"/>
+                        <path d="M1 0L0 4v14h5v4h4l4-4h5l7-7V0H1zm18 13l-4 4H9l-4 4V17H1V2h18v11z" fill="#9147FF"/>
+                        <text x="22" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#9147FF">Twitch</text>
+                    </svg>
+                </div>
+                <!-- Hulu -->
+                <div class="platform-logo">
+                    <svg width="55" height="20" viewBox="0 0 55 20" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="16" fill="#1CE783">hulu</text>
+                    </svg>
+                </div>
+                <!-- + any site -->
+                <div class="platform-logo" style="opacity:0.25!important">
+                    <svg width="70" height="20" viewBox="0 0 70 20" xmlns="http://www.w3.org/2000/svg">
+                        <text x="0" y="15" font-family="Arial, sans-serif" font-size="13" fill="white">+ any site</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
 
         <section class="demo-container animate-up delay-3">
             <div class="mockup-wrapper">
@@ -1036,6 +1191,51 @@
             </div>
         </section>
 
+        <section class="faq-section">
+            <p class="section-label reveal">FAQ</p>
+            <h2 class="section-title reveal">Common questions</h2>
+
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    Does WeSurf work on Netflix?
+                    <span class="faq-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Yes! WeSurf works on Netflix, YouTube, Disney+, Prime Video, Twitch, Hulu, and virtually any site with an HTML5 video player. It also supports general co-browsing on any webpage.</p></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    Do my friends need the extension too?
+                    <span class="faq-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Yes, everyone in the session needs WeSurf installed on their Chrome browser. It's free and takes about 10 seconds to install — just share the link and they'll be watching with you in no time.</p></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    Is WeSurf really free?
+                    <span class="faq-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>Completely free. No subscription, no hidden fees, no account required. Just install and start a session.</p></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    Do I need a Netflix / Disney+ account?
+                    <span class="faq-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>WeSurf syncs the video — it doesn't bypass any subscriptions. Each person needs their own account on the streaming service. WeSurf just keeps everyone in perfect sync.</p></div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    How many people can join a session?
+                    <span class="faq-chevron"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4.5l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </button>
+                <div class="faq-answer"><p>There's no hard limit — invite as many friends as you like. The more the merrier.</p></div>
+            </div>
+        </section>
+
         <section class="how-section">
             <p class="section-label reveal">How it works</p>
             <h2 class="section-title reveal">Up and running in 30 seconds</h2>
@@ -1106,6 +1306,16 @@
             setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 3000);
             setTimeout(animateChat, 6000);
         }
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
 
         const mockupEl = document.querySelector('.mockup-wrapper');
         const mockupObserver = new IntersectionObserver((entries) => {
