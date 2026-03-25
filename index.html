@@ -12,42 +12,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>WeSurf | Watch Videos & Surf the Web Together</title>
-    <meta name="title" content="WeSurf | Watch Videos & Surf the Web Together">
-    <meta name="description" content="The ultimate watch party extension. Sync Netflix, YouTube, and surf the entire web in real-time with friends. Add WeSurf to Chrome for free.">
-    <meta name="keywords" content="watch party, sync video, co-browse, netflix party alternative, youtube sync, watch movies together, shared browsing, chrome extension">
+    <title>WeSurf — Watch Videos & Browse the Web Together | Free Chrome Extension</title>
+    <meta name="title" content="WeSurf — Watch Videos & Browse the Web Together | Free Chrome Extension">
+    <meta name="description" content="WeSurf is the free Chrome extension for watch parties & co-browsing. Sync Netflix, YouTube, and any website in real-time with friends. No account needed — install and invite in seconds.">
+    <meta name="keywords" content="watch party extension, sync video with friends, co-browse, netflix party alternative, youtube watch together, watch movies online together, shared browsing chrome extension, wesurf, multiplayer browser, free watch party">
     <meta name="author" content="WeSurf">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="theme-color" content="#007bff">
     <link rel="canonical" href="https://wesurf.live/">
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WeSurf">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://wesurf.live/">
-    <meta property="og:title" content="WeSurf | Watch Videos & Surf the Web Together">
-    <meta property="og:description" content="Sync your browsing experience. Join the ultimate watch party and explore any website in real-time with friends.">
+    <meta property="og:title" content="WeSurf — Watch Videos & Browse the Web Together">
+    <meta property="og:description" content="The free Chrome extension for watch parties & co-browsing. Sync Netflix, YouTube, or any website in real-time with friends. Install in one click — no account required.">
     <meta property="og:image" content="https://wesurf.live/icon128.png">
+    <meta property="og:image:width" content="128">
+    <meta property="og:image:height" content="128">
+    <meta property="og:image:alt" content="WeSurf Chrome Extension logo">
 
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://wesurf.live/">
-    <meta property="twitter:title" content="WeSurf | Browse the Web Together">
-    <meta property="twitter:description" content="Real-time multiplayer browsing. Sync any webpage, watch videos, and chat with friends while you surf.">
-    <meta property="twitter:image" content="https://wesurf.live/icon128.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wesurf">
+    <meta name="twitter:url" content="https://wesurf.live/">
+    <meta name="twitter:title" content="WeSurf — Watch Videos & Browse the Web Together">
+    <meta name="twitter:description" content="Free Chrome extension. Sync Netflix, YouTube & any website in real-time with friends. No account needed.">
+    <meta name="twitter:image" content="https://wesurf.live/icon128.png">
+    <meta name="twitter:image:alt" content="WeSurf Chrome Extension">
 
     <link rel="icon" type="image/png" href="icon128.png">
     <link rel="apple-touch-icon" href="icon128.png">
 
+    <!-- Preconnect for performance (indirect SEO signal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Structured Data: SoftwareApplication -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "WeSurf",
+      "url": "https://wesurf.live/",
+      "logo": "https://wesurf.live/icon128.png",
+      "image": "https://wesurf.live/icon128.png",
       "operatingSystem": "Chrome",
-      "applicationCategory": "BrowserExtension",
+      "applicationCategory": "BrowserApplication",
+      "applicationSubCategory": "Watch Party Extension",
+      "description": "WeSurf is a free Chrome extension for synchronized web browsing and watch parties. Sync Netflix, YouTube, and any website in real-time with friends via an integrated chat sidebar.",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
-      "description": "A real-time multiplayer browsing extension for synchronized web exploration and watch parties."
+      "downloadUrl": "https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd",
+      "featureList": "Sync video playback, Co-browsing, Integrated live chat, Instant invite links, Works on any website",
+      "softwareVersion": "Beta",
+      "author": {
+        "@type": "Organization",
+        "name": "WeSurf",
+        "url": "https://wesurf.live/",
+        "email": "wesurf.app@gmail.com"
+      }
+    }
+    </script>
+
+    <!-- Structured Data: FAQ (boosts chance of rich results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is WeSurf?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WeSurf is a free Chrome extension that lets you watch videos and browse the web in real-time with friends. It syncs Netflix, YouTube, and virtually any HTML5 video player, with an integrated live chat sidebar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is WeSurf free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, WeSurf is completely free to install and use. No subscription or account is required to get started."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What websites does WeSurf work on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WeSurf works on virtually any website with an HTML5 video player, including Netflix, YouTube, Disney+, and more. It also supports general co-browsing on any webpage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I start a watch party with WeSurf?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Install WeSurf from the Chrome Web Store, click the WeSurf icon to create a room, then share the invite link with your friends. Everyone joins in seconds — no account needed."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: WebSite + SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "WeSurf",
+      "url": "https://wesurf.live/"
     }
     </script>
 
