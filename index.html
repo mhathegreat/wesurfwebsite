@@ -700,60 +700,86 @@
             z-index: 4;
         }
 
-        /* ── Floating WeSurf panel ── */
+        /* ── Floating WeSurf panel (mimics real extension) ── */
         .mockup-panel {
             position: absolute;
-            top: 12px; right: 12px;
-            width: 175px;
-            background: #1a1c20;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            top: 8px; right: 8px; bottom: 8px;
+            width: 210px;
+            background: rgba(11,12,16,0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             z-index: 10;
-            font-size: 11px;
-            transition: width 0.4s cubic-bezier(0.16,1,0.3,1), height 0.4s cubic-bezier(0.16,1,0.3,1), border-radius 0.4s ease;
+            font-size: 10px;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
 
-        /* Collapsed state — small floating button */
-        .mockup-panel.collapsed {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            background: #2563eb;
-            border-color: rgba(37, 99, 235, 0.5);
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
-        }
-
-        .mockup-panel.collapsed .mockup-panel-header,
-        .mockup-panel.collapsed .mockup-tabs,
-        .mockup-panel.collapsed .mockup-messages,
-        .mockup-panel.collapsed .mockup-typing,
-        .mockup-panel.collapsed .mockup-input-row {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .mockup-panel-toggle {
+        /* Top gradient accent line */
+        .mockup-panel::before {
+            content: '';
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 16px;
+            top: 0; left: 20%; right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent);
+            z-index: 1;
+        }
+
+        /* Collapsed state — floating pill */
+        .mockup-panel.collapsed {
+            width: 52px;
+            top: auto;
+            bottom: 12px;
+            right: 12px;
+            height: 32px;
+            border-radius: 100px;
+            background: rgba(13,14,18,0.93);
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        .mockup-panel.collapsed .mp-body { opacity: 0; pointer-events: none; }
+
+        .mockup-pill-icon {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 52px; height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
             opacity: 0;
             transition: opacity 0.3s;
-            pointer-events: none;
         }
 
-        .mockup-panel.collapsed .mockup-panel-toggle {
-            opacity: 1;
+        .mockup-pill-icon .pill-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 6px rgba(34,197,94,0.5);
+            animation: pulse-dot 1.5s ease-in-out infinite;
         }
+
+        .mockup-pill-icon .pill-logo {
+            width: 18px; height: 18px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 800; color: white;
+        }
+
+        .mockup-panel.collapsed .mockup-pill-icon { opacity: 1; }
+        .mockup-panel.collapsed::before { display: none; }
 
         @media (max-width: 640px) {
-            .mockup-panel { width: 130px; }
+            .mockup-panel { width: 150px; }
         }
+
+        .mp-body { transition: opacity 0.3s; }
 
         /* panel header */
         .mockup-panel-header {
@@ -761,146 +787,245 @@
             align-items: center;
             gap: 5px;
             padding: 8px 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: linear-gradient(180deg, rgba(59,130,246,0.05) 0%, transparent 100%);
         }
 
-        .mockup-panel-logo {
-            font-size: 11px;
-            font-weight: 800;
-            color: #fff;
-        }
+        .mockup-panel-logo { font-size: 10px; font-weight: 800; color: #f8fafc; }
 
         .mockup-beta-badge {
-            background: rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.6);
-            font-size: 8px;
+            background: rgba(59,130,246,0.15);
+            color: #60a5fa;
+            font-size: 7px;
             font-weight: 700;
-            padding: 1px 5px;
+            padding: 1px 4px;
             border-radius: 4px;
+            border: 1px solid rgba(59,130,246,0.25);
             letter-spacing: 0.5px;
         }
 
-        .mockup-panel-actions {
-            display: flex;
-            gap: 4px;
-            margin-left: auto;
-        }
+        .mockup-panel-actions { display: flex; gap: 3px; margin-left: auto; }
 
         .mockup-btn-share {
-            background: #2563eb;
-            color: #fff;
-            font-size: 9px;
+            background: transparent;
+            color: #60a5fa;
+            font-size: 8px;
             font-weight: 700;
-            padding: 3px 7px;
-            border-radius: 5px;
+            padding: 3px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(59,130,246,0.3);
         }
 
         .mockup-btn-leave {
-            background: rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
-            font-size: 9px;
+            background: transparent;
+            color: #f87171;
+            font-size: 8px;
             font-weight: 700;
-            padding: 3px 7px;
-            border-radius: 5px;
+            padding: 3px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(248,113,113,0.3);
+        }
+
+        /* User avatars row */
+        .mockup-users {
+            display: flex;
+            align-items: center;
+            padding: 6px 10px;
+            gap: 3px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .mockup-user-av {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            font-size: 9px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid rgba(11,12,16,0.97);
+            position: relative;
+        }
+
+        .mockup-user-av:not(:first-child) { margin-left: -6px; }
+
+        .mockup-user-dot {
+            position: absolute;
+            bottom: -1px; right: -1px;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: #22c55e;
+            border: 1px solid rgba(11,12,16,0.97);
+        }
+
+        .mockup-users-count {
+            font-size: 8px;
+            color: #64748b;
+            margin-left: 4px;
         }
 
         /* tabs */
-        .mockup-tabs {
-            display: flex;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-        }
+        .mockup-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,0.06); }
 
         .mockup-tab {
             flex: 1;
             text-align: center;
-            padding: 6px 4px;
-            font-size: 10px;
+            padding: 5px 4px;
+            font-size: 9px;
             font-weight: 600;
-            color: rgba(255,255,255,0.4);
+            color: #64748b;
             position: relative;
         }
 
-        .mockup-tab.active {
-            color: #fff;
-        }
+        .mockup-tab.active { color: #60a5fa; }
 
         .mockup-tab.active::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 20%; right: 20%;
+            bottom: 0; left: 25%; right: 25%;
             height: 2px;
-            background: #2563eb;
+            background: #3b82f6;
             border-radius: 2px 2px 0 0;
+        }
+
+        /* Voice channel bar */
+        .mockup-voice {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 8px;
+            color: #64748b;
+        }
+
+        .mockup-voice-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 4px rgba(34,197,94,0.5);
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+
+        .mockup-voice-label { font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #94a3b8; font-size: 7px; }
+
+        .mockup-voice-avatars { display: flex; margin-left: auto; gap: 2px; }
+
+        .mockup-voice-av {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            font-size: 8px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid transparent;
+        }
+
+        .mockup-voice-av.speaking { border-color: #3b82f6; box-shadow: 0 0 6px rgba(59,130,246,0.3); }
+
+        /* Reactions bar */
+        .mockup-reactions {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            padding: 4px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .mockup-reaction-btn {
+            width: 20px; height: 20px;
+            border-radius: 5px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .mockup-reaction-btn:hover { background: rgba(255,255,255,0.08); transform: scale(1.2); }
+
+        /* System message */
+        .mockup-system-msg {
+            text-align: center;
+            font-size: 8px;
+            color: #64748b;
+            padding: 2px 0;
+        }
+
+        .mockup-system-msg .sys-dot {
+            display: inline-block;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: #22c55e;
+            margin-right: 3px;
+            vertical-align: middle;
         }
 
         /* chat messages */
         .mockup-messages {
             flex: 1;
-            padding: 8px 8px 4px;
+            padding: 6px 8px 4px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            min-height: 100px;
+            gap: 6px;
+            min-height: 60px;
+            overflow: hidden;
         }
 
-        /* "You" bubble — right aligned blue */
-        .mockup-msg-self {
-            display: flex;
-            justify-content: flex-end;
-            opacity: 0;
-        }
-
-        .mockup-msg-self.show {
-            animation: msgIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
-        }
+        .mockup-msg-self { display: flex; justify-content: flex-end; opacity: 0; }
+        .mockup-msg-self.show { animation: msgIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards; }
 
         .mockup-bubble-self {
-            background: #2563eb;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
-            font-size: 10px;
+            font-size: 9px;
             padding: 5px 9px;
             border-radius: 12px 12px 3px 12px;
             max-width: 85%;
             line-height: 1.4;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* Others — left aligned with avatar */
-        .mockup-msg-other {
-            display: flex;
-            align-items: flex-end;
-            gap: 5px;
-            opacity: 0;
-        }
-
-        .mockup-msg-other.show {
-            animation: msgIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
-        }
+        .mockup-msg-other { display: flex; align-items: flex-end; gap: 4px; opacity: 0; }
+        .mockup-msg-other.show { animation: msgIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards; }
 
         .mockup-msg-av {
-            width: 20px; height: 20px;
+            width: 16px; height: 16px;
             border-radius: 50%;
-            font-size: 11px;
+            font-size: 9px;
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
 
-        .mockup-msg-content { display: flex; flex-direction: column; gap: 2px; }
-
-        .mockup-msg-name {
-            font-size: 8px;
-            color: rgba(255,255,255,0.4);
-            padding-left: 2px;
-        }
+        .mockup-msg-content { display: flex; flex-direction: column; gap: 1px; }
+        .mockup-msg-name { font-size: 7px; color: #64748b; font-weight: 600; padding-left: 2px; }
 
         .mockup-bubble-other {
-            background: #2a2d33;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
             color: rgba(255,255,255,0.9);
-            font-size: 10px;
+            font-size: 9px;
             padding: 5px 9px;
             border-radius: 12px 12px 12px 3px;
             max-width: 85%;
             line-height: 1.4;
         }
+
+        /* Message reactions */
+        .mockup-msg-react {
+            display: flex;
+            gap: 3px;
+            margin-top: 2px;
+            padding-left: 20px;
+        }
+
+        .mockup-msg-react-pill {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            padding: 1px 5px;
+            font-size: 8px;
+        }
+
+        .mockup-msg-react-pill.own { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.25); }
 
         @keyframes msgIn {
             from { opacity: 0; transform: translateY(6px); }
@@ -909,15 +1034,16 @@
 
         /* typing indicator */
         .mockup-typing {
-            padding: 0 8px 4px;
-            font-size: 9px;
-            color: rgba(255,255,255,0.35);
+            padding: 0 8px 3px;
+            font-size: 8px;
+            color: #64748b;
+            font-style: italic;
             display: flex;
             align-items: center;
             gap: 4px;
             opacity: 0;
             transition: opacity 0.3s;
-            height: 18px;
+            height: 14px;
         }
 
         .mockup-typing.show { opacity: 1; }
@@ -946,27 +1072,41 @@
         .mockup-input-row {
             display: flex;
             align-items: center;
-            gap: 5px;
-            padding: 6px 8px 8px;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            gap: 3px;
+            padding: 5px 8px 7px;
+            background: rgba(0,0,0,0.2);
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
         .mockup-input {
             flex: 1;
-            background: rgba(255,255,255,0.07);
-            border-radius: 7px;
-            padding: 5px 8px;
-            font-size: 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 4px 8px;
+            font-size: 9px;
             color: rgba(255,255,255,0.25);
         }
 
-        .mockup-send {
-            width: 22px; height: 22px;
-            background: #2563eb;
+        .mockup-input-btn {
+            width: 20px; height: 20px;
             border-radius: 6px;
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
             font-size: 10px;
+            cursor: pointer;
+        }
+
+        .mockup-input-btn:hover { background: rgba(255,255,255,0.08); }
+
+        .mockup-send {
+            width: 20px; height: 20px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-size: 9px;
+            color: white;
         }
 
         /* ── Features intro ── */
@@ -1664,17 +1804,31 @@
                     <!-- Timestamp -->
                     <div class="mockup-timestamp">20:37</div>
 
-                    <!-- ── WeSurf floating panel ── -->
+                    <!-- ── WeSurf floating panel (mimics real extension) ── -->
                     <div class="mockup-panel collapsed" id="mockupPanel">
-                        <div class="mockup-panel-toggle">💬</div>
+                        <!-- Collapsed pill state -->
+                        <div class="mockup-pill-icon">
+                            <div class="pill-logo">W</div>
+                            <div class="pill-dot"></div>
+                        </div>
+
+                        <div class="mp-body">
                         <!-- Header -->
                         <div class="mockup-panel-header">
                             <span class="mockup-panel-logo">WeSurf</span>
                             <span class="mockup-beta-badge">BETA</span>
                             <div class="mockup-panel-actions">
-                                <div class="mockup-btn-share">⬆ Share</div>
+                                <div class="mockup-btn-share">Share</div>
                                 <div class="mockup-btn-leave">Leave</div>
                             </div>
+                        </div>
+
+                        <!-- Online users -->
+                        <div class="mockup-users">
+                            <div class="mockup-user-av">😊<div class="mockup-user-dot"></div></div>
+                            <div class="mockup-user-av">🧑<div class="mockup-user-dot"></div></div>
+                            <div class="mockup-user-av">🧔<div class="mockup-user-dot"></div></div>
+                            <span class="mockup-users-count">3 online</span>
                         </div>
 
                         <!-- Tabs -->
@@ -1683,18 +1837,47 @@
                             <div class="mockup-tab">⚙ Settings</div>
                         </div>
 
+                        <!-- Voice channel -->
+                        <div class="mockup-voice">
+                            <div class="mockup-voice-dot"></div>
+                            <span class="mockup-voice-label">Voice</span>
+                            <span style="color:#94a3b8">· 2</span>
+                            <div class="mockup-voice-avatars">
+                                <div class="mockup-voice-av speaking">🧑</div>
+                                <div class="mockup-voice-av">🧔</div>
+                            </div>
+                        </div>
+
+                        <!-- Quick reactions -->
+                        <div class="mockup-reactions">
+                            <div class="mockup-reaction-btn">👍</div>
+                            <div class="mockup-reaction-btn">❤️</div>
+                            <div class="mockup-reaction-btn">😂</div>
+                            <div class="mockup-reaction-btn">🔥</div>
+                            <div class="mockup-reaction-btn">🎉</div>
+                            <div class="mockup-reaction-btn">😮</div>
+                        </div>
+
                         <!-- Messages -->
                         <div class="mockup-messages">
+                            <div class="mockup-system-msg"><span class="sys-dot"></span>Jordan joined the session</div>
+
                             <div class="mockup-msg-self" id="msg1">
                                 <div class="mockup-bubble-self">I love this show 😂</div>
                             </div>
+
                             <div class="mockup-msg-other" id="msg2">
                                 <div class="mockup-msg-av">🧑</div>
                                 <div class="mockup-msg-content">
                                     <span class="mockup-msg-name">Jordan</span>
                                     <div class="mockup-bubble-other">He is so funny!</div>
+                                    <div class="mockup-msg-react">
+                                        <span class="mockup-msg-react-pill own">😂 2</span>
+                                        <span class="mockup-msg-react-pill">👍 1</span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="mockup-msg-other" id="msg3">
                                 <div class="mockup-msg-av">🧔</div>
                                 <div class="mockup-msg-content">
@@ -1706,15 +1889,17 @@
 
                         <!-- Typing -->
                         <div class="mockup-typing" id="mockupTyping">
-                            Jordan is typing
+                            Jordan is typing…
                             <span class="typing-dots"><span></span><span></span><span></span></span>
                         </div>
 
                         <!-- Input -->
                         <div class="mockup-input-row">
                             <div class="mockup-input">Message...</div>
-                            <div style="font-size:12px">😊</div>
+                            <div class="mockup-input-btn">😊</div>
+                            <div class="mockup-input-btn">✏️</div>
                             <div class="mockup-send">➤</div>
+                        </div>
                         </div>
                     </div>
                 </div>
