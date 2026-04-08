@@ -714,6 +714,41 @@
             overflow: hidden;
             z-index: 10;
             font-size: 11px;
+            transition: width 0.4s cubic-bezier(0.16,1,0.3,1), height 0.4s cubic-bezier(0.16,1,0.3,1), border-radius 0.4s ease;
+        }
+
+        /* Collapsed state — small floating button */
+        .mockup-panel.collapsed {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: #2563eb;
+            border-color: rgba(37, 99, 235, 0.5);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .mockup-panel.collapsed .mockup-panel-header,
+        .mockup-panel.collapsed .mockup-tabs,
+        .mockup-panel.collapsed .mockup-messages,
+        .mockup-panel.collapsed .mockup-typing,
+        .mockup-panel.collapsed .mockup-input-row {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .mockup-panel-toggle {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .mockup-panel.collapsed .mockup-panel-toggle {
+            opacity: 1;
         }
 
         @media (max-width: 640px) {
@@ -1630,7 +1665,8 @@
                     <div class="mockup-timestamp">20:37</div>
 
                     <!-- ── WeSurf floating panel ── -->
-                    <div class="mockup-panel" id="mockupPanel">
+                    <div class="mockup-panel collapsed" id="mockupPanel">
+                        <div class="mockup-panel-toggle">💬</div>
                         <!-- Header -->
                         <div class="mockup-panel-header">
                             <span class="mockup-panel-logo">WeSurf</span>
@@ -1894,8 +1930,9 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Animate chat messages in sequence, then loop
+        // Animate chat messages in sequence with collapse/expand, then loop
         function animateChat() {
+            const panel = document.getElementById('mockupPanel');
             const msg1 = document.getElementById('msg1');
             const msg2 = document.getElementById('msg2');
             const msg3 = document.getElementById('msg3');
@@ -1903,11 +1940,19 @@
             [msg1, msg2, msg3].forEach(m => m.classList.remove('show'));
             typing.classList.remove('show');
 
-            setTimeout(() => msg1.classList.add('show'), 500);
-            setTimeout(() => msg2.classList.add('show'), 1400);
-            setTimeout(() => typing.classList.add('show'), 2200);
-            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 3000);
-            setTimeout(animateChat, 6000);
+            // Start collapsed, then expand
+            panel.classList.add('collapsed');
+            setTimeout(() => panel.classList.remove('collapsed'), 800);
+
+            // Messages appear after expand
+            setTimeout(() => msg1.classList.add('show'), 1500);
+            setTimeout(() => msg2.classList.add('show'), 2400);
+            setTimeout(() => typing.classList.add('show'), 3200);
+            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 4000);
+
+            // Collapse again before loop
+            setTimeout(() => panel.classList.add('collapsed'), 6500);
+            setTimeout(animateChat, 8000);
         }
 
         // FAQ accordion
