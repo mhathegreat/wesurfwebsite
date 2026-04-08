@@ -542,69 +542,7 @@
             padding-bottom: 20px;
         }
 
-        /* ── Screenshots showcase ── */
-        .screenshots-section {
-            max-width: 1100px;
-            margin: 0 auto 100px;
-            padding: 0 5%;
-            text-align: center;
-        }
-
-        .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto auto;
-            gap: 16px;
-            margin-top: 48px;
-        }
-
-        .screenshot-item:first-child {
-            grid-column: 1 / 3;
-            grid-row: 1 / 3;
-        }
-
-        @media (max-width: 768px) {
-            .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
-            .screenshot-item:first-child { grid-column: 1 / -1; grid-row: auto; }
-        }
-
-        @media (max-width: 480px) {
-            .screenshots-grid { grid-template-columns: 1fr; }
-            .screenshot-item:first-child { grid-column: auto; }
-        }
-
-        .screenshot-item {
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.07);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .screenshot-item:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(77,173,255,0.15);
-        }
-
-        .screenshot-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .screenshot-caption {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 24px 20px 16px;
-            background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
-            font-size: 13px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.9);
-            pointer-events: none;
-        }
+        /* (screenshots section removed — images now used in feature showcases) */
 
         /* ── Mockup ── */
         .mockup-wrapper {
@@ -980,92 +918,163 @@
             font-size: 10px;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto 100px;
-            padding: 0 5%;
+        /* ── Feature showcase (alternating) ── */
+        .feature-showcase {
+            display: flex;
+            align-items: center;
+            gap: 64px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 5%;
         }
 
-        .feature-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            padding: 40px 32px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            position: relative;
+        .feature-showcase.reverse { flex-direction: row-reverse; }
+
+        .feature-showcase-text { flex: 1; }
+
+        .feature-showcase-text .section-label { margin-bottom: 12px; }
+
+        .feature-showcase-text h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            background: linear-gradient(180deg, #ffffff 0%, #c4c4cc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-showcase-text p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        .feature-showcase-visual {
+            flex: 1;
+            border-radius: 16px;
             overflow: hidden;
-            z-index: 0;
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 1px;
-            background: conic-gradient(from var(--gradient-angle), transparent 40%, rgba(77,173,255,0.4) 50%, transparent 60%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        .feature-showcase-visual:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(77,173,255,0.12);
         }
 
-        .feature-card:hover::before {
-            opacity: 1;
-            animation: border-spin 3s linear infinite;
+        .feature-showcase-visual img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         @keyframes border-spin {
             to { --gradient-angle: 360deg; }
         }
 
-        .feature-card:hover {
-            border-color: rgba(77, 173, 255, 0.15);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(77, 173, 255, 0.08);
+        .features-cta {
+            text-align: center;
+            padding: 0 5% 80px;
         }
 
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .feature-icon {
-            font-size: 36px;
-            margin-bottom: 24px;
-            background: rgba(77, 173, 255, 0.1);
-            width: 64px; height: 64px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 16px;
-            border: 1px solid rgba(77, 173, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            background: rgba(77, 173, 255, 0.18);
-            border-color: rgba(77, 173, 255, 0.4);
-        }
-
-        /* How it works */
+        /* How it works — tabbed */
         .how-section {
             max-width: 900px;
             margin: 0 auto 100px;
             padding: 0 5%;
             text-align: center;
+        }
+
+        .how-tabs { max-width: 800px; margin: 0 auto; }
+
+        .how-tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .how-tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .how-tab-btn:hover { border-color: rgba(77,173,255,0.2); color: var(--text-main); }
+
+        .how-tab-btn.active {
+            background: rgba(0,123,255,0.1);
+            border-color: rgba(0,123,255,0.3);
+            color: var(--text-main);
+        }
+
+        .how-tab-num {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800;
+            transition: all 0.3s;
+        }
+
+        .how-tab-btn.active .how-tab-num {
+            background: linear-gradient(135deg, var(--primary), #0056b3);
+            color: white;
+            box-shadow: 0 2px 12px rgba(0,123,255,0.35);
+        }
+
+        .how-tab-panel {
+            display: none;
+            align-items: center;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .how-tab-panel.active { display: flex; animation: fadeUp 0.4s ease; }
+
+        .how-tab-text { flex: 1; }
+        .how-tab-text h3 { color: var(--text-main); }
+        .how-tab-text p { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+
+        .how-tab-visual {
+            flex: 1;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+        }
+
+        .how-tab-visual img { width: 100%; height: auto; display: block; }
+
+        .how-tab-progress {
+            height: 3px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
+            margin-top: 32px;
+            overflow: hidden;
+        }
+
+        .how-tab-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 3px;
+            transition: width 0.1s linear;
         }
 
         .section-label {
@@ -1088,67 +1097,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 48px;
-            position: relative;
-        }
-
-        .steps::before {
-            content: '';
-            position: absolute;
-            top: 24px;
-            left: 15%;
-            right: 15%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), rgba(77,173,255,0.2), var(--primary));
-            z-index: 0;
-        }
-
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .step-number {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), #0056b3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 800;
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.35);
-            flex-shrink: 0;
-            position: relative;
-            z-index: 1;
-            transform: scale(0.5);
-            opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease;
-        }
-
-        .step.visible .step-number {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .step h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .step p {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.6;
-        }
+        /* (old step styles removed — now using tabbed interface) */
 
         /* Bottom CTA */
         .cta-section {
@@ -1308,15 +1257,12 @@
             }
             nav.nav-open .nav-center { display: flex; }
             .nav-cta { display: none; }
-            .features { grid-template-columns: 1fr; }
+            .feature-showcase, .feature-showcase.reverse { flex-direction: column; gap: 32px; padding: 48px 5%; }
+            .feature-showcase-text p { max-width: 100%; }
             .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-            .steps::before {
-                top: 0; bottom: 0;
-                left: 24px; right: auto;
-                width: 2px; height: auto;
-            }
-            .steps { grid-template-columns: 1fr; gap: 32px; }
-            .step { flex-direction: row; text-align: left; }
+            .how-tab-panel.active { flex-direction: column; }
+            .how-tab-buttons { flex-wrap: wrap; }
+            .how-tab-btn { padding: 10px 16px; font-size: 13px; }
         }
 
         @media (max-width: 480px) {
@@ -1354,7 +1300,7 @@
             <div class="hero-aurora"></div>
             <div class="pill animate-up">✨ Now in Beta for Chrome</div>
             <h1 class="animate-up delay-1">The whole internet,<br>now multiplayer.</h1>
-            <p class="animate-up delay-2">The ultimate watch party extension. Sync Netflix, YouTube, and surf the web in real-time with your friends across any website.</p>
+            <p class="animate-up delay-2">The ultimate watch party and co-browsing extension. Sync videos, browse, shop, and do anything on the web together with friends in real-time.</p>
             <div class="animate-up delay-3">
                 <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" rel="noopener noreferrer" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Add to Chrome — It's Free</a>
             </div>
@@ -1382,18 +1328,28 @@
                     <div class="platform-logo"><svg width="90" height="20" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="2" width="28" height="16" rx="4" fill="#FF0000"/><polygon points="11,6 11,14 20,10" fill="white"/><text x="32" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="white">YouTube</text></svg></div>
                     <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="15" fill="#0063e5">Disney</text><text x="58" y="13" font-family="Arial Black, Arial" font-weight="900" font-size="18" fill="#0063e5">+</text></svg></div>
                     <div class="platform-logo"><svg width="105" height="20" viewBox="0 0 105 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="white">prime </text><text x="42" y="15" font-family="Arial, sans-serif" font-weight="400" font-size="13" fill="white">video</text><path d="M0 18 Q52 23 104 18" stroke="#00A8E1" stroke-width="1.5" fill="none"/></svg></div>
+                    <div class="platform-logo"><svg width="50" height="20" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="16" fill="#002be7">Max</text></svg></div>
                     <div class="platform-logo"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><path d="M3 2h6v8H3zm8 0h6v8h-6z" fill="#9147FF"/><path d="M1 0L0 4v14h5v4h4l4-4h5l7-7V0H1zm18 13l-4 4H9l-4 4V17H1V2h18v11z" fill="#9147FF"/><text x="22" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#9147FF">Twitch</text></svg></div>
                     <div class="platform-logo"><svg width="55" height="20" viewBox="0 0 55 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="16" fill="#1CE783">hulu</text></svg></div>
-                    <div class="platform-logo" style="opacity:0.3"><svg width="70" height="20" viewBox="0 0 70 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial, sans-serif" font-size="13" fill="white">+ any site</text></svg></div>
+                    <div class="platform-logo"><svg width="100" height="20" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#F47521">Crunchyroll</text></svg></div>
+                    <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#a3a3a3">Apple TV</text><text x="62" y="13" font-family="Arial Black, Arial" font-weight="900" font-size="15" fill="#a3a3a3">+</text></svg></div>
+                    <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#1CE783">Spotify</text></svg></div>
+                    <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#FFD100">Peacock</text></svg></div>
+                    <div class="platform-logo" style="opacity:0.3"><svg width="70" height="20" viewBox="0 0 70 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial, sans-serif" font-size="13" fill="white">+ 20 more</text></svg></div>
                 </div>
                 <div class="marquee-content" aria-hidden="true">
                     <div class="platform-logo"><svg width="80" height="22" viewBox="0 0 111 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h13.5v30H0zM97.5 0H111v30H97.5z" fill="#E50914"/><path d="M13.5 0h84v30h-84z" fill="#E50914"/><text x="4" y="23" font-family="Arial Black, Arial" font-weight="900" font-size="22" fill="white" letter-spacing="-0.5">NETFLIX</text></svg></div>
                     <div class="platform-logo"><svg width="90" height="20" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="2" width="28" height="16" rx="4" fill="#FF0000"/><polygon points="11,6 11,14 20,10" fill="white"/><text x="32" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="white">YouTube</text></svg></div>
                     <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="15" fill="#0063e5">Disney</text><text x="58" y="13" font-family="Arial Black, Arial" font-weight="900" font-size="18" fill="#0063e5">+</text></svg></div>
                     <div class="platform-logo"><svg width="105" height="20" viewBox="0 0 105 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="white">prime </text><text x="42" y="15" font-family="Arial, sans-serif" font-weight="400" font-size="13" fill="white">video</text><path d="M0 18 Q52 23 104 18" stroke="#00A8E1" stroke-width="1.5" fill="none"/></svg></div>
+                    <div class="platform-logo"><svg width="50" height="20" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="16" fill="#002be7">Max</text></svg></div>
                     <div class="platform-logo"><svg width="80" height="22" viewBox="0 0 80 22" xmlns="http://www.w3.org/2000/svg"><path d="M3 2h6v8H3zm8 0h6v8h-6z" fill="#9147FF"/><path d="M1 0L0 4v14h5v4h4l4-4h5l7-7V0H1zm18 13l-4 4H9l-4 4V17H1V2h18v11z" fill="#9147FF"/><text x="22" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#9147FF">Twitch</text></svg></div>
                     <div class="platform-logo"><svg width="55" height="20" viewBox="0 0 55 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="16" fill="#1CE783">hulu</text></svg></div>
-                    <div class="platform-logo" style="opacity:0.3"><svg width="70" height="20" viewBox="0 0 70 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial, sans-serif" font-size="13" fill="white">+ any site</text></svg></div>
+                    <div class="platform-logo"><svg width="100" height="20" viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#F47521">Crunchyroll</text></svg></div>
+                    <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial, sans-serif" font-weight="700" font-size="13" fill="#a3a3a3">Apple TV</text><text x="62" y="13" font-family="Arial Black, Arial" font-weight="900" font-size="15" fill="#a3a3a3">+</text></svg></div>
+                    <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="14" fill="#1CE783">Spotify</text></svg></div>
+                    <div class="platform-logo"><svg width="80" height="20" viewBox="0 0 80 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="16" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#FFD100">Peacock</text></svg></div>
+                    <div class="platform-logo" style="opacity:0.3"><svg width="70" height="20" viewBox="0 0 70 20" xmlns="http://www.w3.org/2000/svg"><text x="0" y="15" font-family="Arial, sans-serif" font-size="13" fill="white">+ 20 more</text></svg></div>
                 </div>
             </div>
         </div>
@@ -1496,47 +1452,57 @@
 
         <div class="section-divider"></div>
 
-        <section class="features" id="features">
+        <div id="features">
             <h2 class="sr-only">Features</h2>
-            <div class="feature-card reveal reveal-delay-1">
-                <div class="feature-icon">🌍</div>
-                <h3>Works Everywhere</h3>
-                <p>Not just Netflix. Play, pause, and seek videos in perfect harmony on virtually any HTML5 video player on the web.</p>
-            </div>
-            <div class="feature-card reveal reveal-delay-2">
-                <div class="feature-icon">💬</div>
-                <h3>Integrated Chat</h3>
-                <p>A sleek chat sidebar injects directly into the webpage. Talk and react without ever switching tabs, even in fullscreen.</p>
-            </div>
-            <div class="feature-card reveal reveal-delay-3">
-                <div class="feature-icon">🔗</div>
-                <h3>Instant Invites</h3>
-                <p>Generate a simple link, send it to your friends, and they will auto-join your private room the second they click it.</p>
-            </div>
-        </section>
 
-        <section class="screenshots-section section-alt reveal" id="screenshots">
-            <p class="section-label">See it in action</p>
-            <h2 class="section-title">Built for the way you actually hang out</h2>
-            <div class="screenshots-grid">
-                <div class="screenshot-item reveal reveal-delay-1">
-                    <img src="screenshot-video.jpeg" alt="Perfectly synced video and fullscreen chat with WeSurf" loading="lazy">
-                    <div class="screenshot-caption">Synced video playback</div>
+            <div class="feature-showcase reveal">
+                <div class="feature-showcase-text">
+                    <p class="section-label">UNIVERSAL COMPATIBILITY</p>
+                    <h3>Watch and browse together on 30+ sites</h3>
+                    <p>WeSurf isn't just for video — browse, shop, research, or explore any website together in real-time. Plus sync Netflix, YouTube, Disney+, Max, Twitch, and 25+ streaming sites with frame-perfect video playback.</p>
                 </div>
-                <div class="screenshot-item reveal reveal-delay-2">
-                    <img src="screenshot-browse.jpeg" alt="Browse the entire internet together with WeSurf" loading="lazy">
-                    <div class="screenshot-caption">Browse together</div>
-                </div>
-                <div class="screenshot-item reveal reveal-delay-3">
-                    <img src="screenshot-panel.jpg" alt="WeSurf chat panel with voice and reactions" loading="lazy">
-                    <div class="screenshot-caption">Chat panel</div>
-                </div>
-                <div class="screenshot-item reveal reveal-delay-1">
-                    <img src="screenshot-popup.png" alt="Start a WeSurf session instantly, no sign-up required" loading="lazy">
-                    <div class="screenshot-caption">Quick start popup</div>
+                <div class="feature-showcase-visual">
+                    <img src="screenshot-video.jpeg" alt="Perfectly synced video playback with WeSurf on Netflix" loading="lazy">
                 </div>
             </div>
-        </section>
+
+            <div class="feature-showcase reverse reveal">
+                <div class="feature-showcase-text">
+                    <p class="section-label">BUILT-IN VOICE & CHAT</p>
+                    <h3>Talk while you watch</h3>
+                    <p>Voice chat, text messages, emoji reactions, and typing indicators — all built into a sleek sidebar that works even in fullscreen. No need to switch tabs or open another app.</p>
+                </div>
+                <div class="feature-showcase-visual">
+                    <img src="screenshot-panel.jpg" alt="WeSurf voice chat and text messaging panel" loading="lazy">
+                </div>
+            </div>
+
+            <div class="feature-showcase reveal">
+                <div class="feature-showcase-text">
+                    <p class="section-label">INTERACTIVE</p>
+                    <h3>Draw and react in real-time</h3>
+                    <p>Doodle on screen with the drawing canvas, send floating emoji reactions that animate across the page, and react to messages — whether you're watching a movie or shopping together. Only on WeSurf.</p>
+                </div>
+                <div class="feature-showcase-visual">
+                    <img src="screenshot-browse.jpeg" alt="WeSurf co-browsing with drawing and reactions" loading="lazy">
+                </div>
+            </div>
+
+            <div class="feature-showcase reverse reveal">
+                <div class="feature-showcase-text">
+                    <p class="section-label">HOST CONTROLS</p>
+                    <h3>Your party, your rules</h3>
+                    <p>Lock navigation so only you control the page. Share a simple 6-character room code to invite friends instantly — no accounts, no sign-ups, no friction.</p>
+                </div>
+                <div class="feature-showcase-visual">
+                    <img src="screenshot-popup.png" alt="WeSurf room creation with instant invite codes" loading="lazy">
+                </div>
+            </div>
+
+            <div class="features-cta reveal">
+                <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" rel="noopener noreferrer" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Try WeSurf — It's Free</a>
+            </div>
+        </div>
 
         <section class="faq-section" id="faq">
             <p class="section-label reveal">FAQ</p>
@@ -1586,27 +1552,49 @@
         <section class="how-section section-alt" id="how-it-works">
             <p class="section-label reveal">How it works</p>
             <h2 class="section-title reveal">Up and running in 30 seconds</h2>
-            <div class="steps">
-                <div class="step reveal reveal-delay-1">
-                    <div class="step-number">1</div>
-                    <div>
-                        <h3 style="font-size:16px">Install WeSurf</h3>
-                        <p>Add the extension to Chrome in one click. No account required.</p>
+            <div class="how-tabs reveal">
+                <div class="how-tab-buttons">
+                    <button class="how-tab-btn active" data-step="0">
+                        <span class="how-tab-num">1</span> Install
+                    </button>
+                    <button class="how-tab-btn" data-step="1">
+                        <span class="how-tab-num">2</span> Invite
+                    </button>
+                    <button class="how-tab-btn" data-step="2">
+                        <span class="how-tab-num">3</span> Watch
+                    </button>
+                </div>
+                <div class="how-tab-panels">
+                    <div class="how-tab-panel active" data-panel="0">
+                        <div class="how-tab-text">
+                            <h3 style="font-size:20px;font-weight:700;margin-bottom:12px">Install WeSurf</h3>
+                            <p>Click "Add to Chrome" on the Chrome Web Store. The extension installs in seconds — no account, no sign-up, no configuration needed.</p>
+                        </div>
+                        <div class="how-tab-visual">
+                            <img src="screenshot-popup.png" alt="Install WeSurf from Chrome Web Store" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="how-tab-panel" data-panel="1">
+                        <div class="how-tab-text">
+                            <h3 style="font-size:20px;font-weight:700;margin-bottom:12px">Invite your friends</h3>
+                            <p>Click the WeSurf icon, hit "Create Room", and share the 6-character code or link. Friends join instantly when they click it.</p>
+                        </div>
+                        <div class="how-tab-visual">
+                            <img src="screenshot-panel.jpg" alt="Share WeSurf room invite with friends" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="how-tab-panel" data-panel="2">
+                        <div class="how-tab-text">
+                            <h3 style="font-size:20px;font-weight:700;margin-bottom:12px">Watch together</h3>
+                            <p>Video syncs automatically. Browse any website together, chat, react, talk with voice, and even draw on screen — all in real-time.</p>
+                        </div>
+                        <div class="how-tab-visual">
+                            <img src="screenshot-video.jpeg" alt="Watch videos together in sync with WeSurf" loading="lazy">
+                        </div>
                     </div>
                 </div>
-                <div class="step reveal reveal-delay-2">
-                    <div class="step-number">2</div>
-                    <div>
-                        <h3 style="font-size:16px">Share your link</h3>
-                        <p>Click the WeSurf icon to create a room and send the invite link to your friends.</p>
-                    </div>
-                </div>
-                <div class="step reveal reveal-delay-3">
-                    <div class="step-number">3</div>
-                    <div>
-                        <h3 style="font-size:16px">Surf together</h3>
-                        <p>Everyone's browser stays in sync. Watch, browse, and chat in real-time.</p>
-                    </div>
+                <div class="how-tab-progress">
+                    <div class="how-tab-progress-bar" id="howProgress"></div>
                 </div>
             </div>
         </section>
@@ -1713,6 +1701,42 @@
         document.getElementById('hamburger').addEventListener('click', () => {
             document.querySelector('nav').classList.toggle('nav-open');
         });
+
+        // How it Works tabs with auto-cycle
+        (function() {
+            const btns = document.querySelectorAll('.how-tab-btn');
+            const panels = document.querySelectorAll('.how-tab-panel');
+            const bar = document.getElementById('howProgress');
+            if (!btns.length) return;
+            let current = 0, interval, startTime;
+            const DURATION = 5000;
+
+            function switchTab(i) {
+                btns.forEach(b => b.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                btns[i].classList.add('active');
+                panels[i].classList.add('active');
+                current = i;
+                startTime = Date.now();
+            }
+
+            function tick() {
+                const elapsed = Date.now() - startTime;
+                const pct = Math.min((elapsed / DURATION) * 100, 100);
+                bar.style.width = ((current * 100 + pct) / 3) + '%';
+                if (elapsed >= DURATION) {
+                    switchTab((current + 1) % 3);
+                }
+                requestAnimationFrame(tick);
+            }
+
+            btns.forEach((btn, i) => {
+                btn.addEventListener('click', () => { switchTab(i); });
+            });
+
+            switchTab(0);
+            requestAnimationFrame(tick);
+        })();
 
         // Close mobile nav when clicking a link
         document.querySelectorAll('.nav-center .nav-link').forEach(link => {
