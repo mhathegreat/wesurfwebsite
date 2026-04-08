@@ -1138,6 +1138,170 @@
             color: white;
         }
 
+        /* ── Site switching backgrounds ── */
+        .mockup-page {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .mockup-page.active { opacity: 1; }
+
+        /* Netflix page */
+        .mockup-page-netflix {
+            background: radial-gradient(ellipse at 30% 40%, #1a1028 0%, #0d0d1a 40%, #000 70%);
+        }
+
+        /* Wikipedia page */
+        .mockup-page-wiki {
+            background: #f8f9fa;
+            padding: 14px 18px;
+            overflow: hidden;
+        }
+
+        .mockup-page-wiki .wiki-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+            font-family: 'Linux Libertine', Georgia, serif;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .mockup-page-wiki .wiki-text {
+            font-size: 9px;
+            color: #333;
+            line-height: 1.6;
+            font-family: sans-serif;
+        }
+
+        .mockup-page-wiki .wiki-text a { color: #0645ad; text-decoration: none; }
+
+        .mockup-page-wiki .wiki-img {
+            float: right;
+            width: 80px;
+            height: 60px;
+            background: #e0e0e0;
+            border: 1px solid #ccc;
+            margin: 0 0 8px 10px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        /* Amazon page */
+        .mockup-page-amazon {
+            background: #fff;
+            padding: 12px 16px;
+            overflow: hidden;
+        }
+
+        .mockup-page-amazon .amz-header {
+            background: #131921;
+            margin: -12px -16px 10px;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mockup-page-amazon .amz-logo {
+            font-size: 12px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .mockup-page-amazon .amz-search {
+            flex: 1;
+            background: #febd69;
+            border-radius: 4px;
+            height: 18px;
+        }
+
+        .mockup-page-amazon .amz-product {
+            display: flex;
+            gap: 14px;
+        }
+
+        .mockup-page-amazon .amz-img {
+            width: 90px;
+            height: 90px;
+            background: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .mockup-page-amazon .amz-title {
+            font-size: 11px;
+            color: #0f1111;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .mockup-page-amazon .amz-price {
+            font-size: 14px;
+            color: #0f1111;
+            font-weight: 700;
+        }
+
+        .mockup-page-amazon .amz-price span { font-size: 9px; vertical-align: top; }
+
+        .mockup-page-amazon .amz-stars {
+            color: #de7921;
+            font-size: 10px;
+            margin-bottom: 3px;
+        }
+
+        .mockup-page-amazon .amz-btn {
+            background: #ffd814;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 9px;
+            font-weight: 600;
+            color: #0f1111;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        /* Drawing overlay */
+        .mockup-draw-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mockup-draw-overlay.active { opacity: 1; }
+
+        .mockup-draw-overlay svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .draw-stroke {
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: draw-in 1.5s ease forwards;
+        }
+
+        .draw-stroke-2 { animation-delay: 0.6s; }
+        .draw-stroke-3 { animation-delay: 1.2s; }
+
+        @keyframes draw-in {
+            to { stroke-dashoffset: 0; }
+        }
+
         /* ── Features intro ── */
         .features-intro {
             text-align: center;
@@ -1800,38 +1964,68 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <div class="mockup-urlbar">netflix.com/watch/brooklyn-nine-nine</div>
+                    <div class="mockup-urlbar" id="mockupUrl">netflix.com/watch/brooklyn-nine-nine</div>
                 </div>
 
-                <!-- Video area -->
+                <!-- Video / page area -->
                 <div class="mockup-video">
-                    <div class="mockup-video-bg"></div>
-                    <div class="mockup-bottom-gradient"></div>
-
-                    <!-- Back arrow -->
-                    <div class="mockup-back">←</div>
-
-                    <!-- Progress bar -->
-                    <div class="mockup-progressbar">
-                        <div class="mockup-progressbar-fill"></div>
+                    <!-- Netflix page -->
+                    <div class="mockup-page mockup-page-netflix active" id="pageNetflix">
+                        <div class="mockup-bottom-gradient"></div>
+                        <div class="mockup-back" style="z-index:2">←</div>
+                        <div class="mockup-progressbar" style="z-index:2">
+                            <div class="mockup-progressbar-fill"></div>
+                        </div>
+                        <div class="mockup-controls" style="z-index:2">
+                            <div class="mockup-ctrl-left">
+                                <span>⏸</span>
+                                <span style="font-size:11px">↺10</span>
+                                <span style="font-size:11px">10↻</span>
+                                <span style="font-size:11px">🔊</span>
+                            </div>
+                            <div class="mockup-ctrl-center">Brooklyn Nine-Nine &nbsp;E5 &nbsp;Halloween IV</div>
+                            <div class="mockup-ctrl-right">
+                                <span>⏭</span><span>⊞</span><span>CC</span><span>⛶</span>
+                            </div>
+                        </div>
+                        <div class="mockup-timestamp" style="z-index:2">20:37</div>
                     </div>
 
-                    <!-- Controls -->
-                    <div class="mockup-controls">
-                        <div class="mockup-ctrl-left">
-                            <span>⏸</span>
-                            <span style="font-size:11px">↺10</span>
-                            <span style="font-size:11px">10↻</span>
-                            <span style="font-size:11px">🔊</span>
-                        </div>
-                        <div class="mockup-ctrl-center">Brooklyn Nine-Nine &nbsp;E5 &nbsp;Halloween IV</div>
-                        <div class="mockup-ctrl-right">
-                            <span>⏭</span><span>⊞</span><span>CC</span><span>⛶</span>
+                    <!-- Wikipedia page -->
+                    <div class="mockup-page mockup-page-wiki" id="pageWiki">
+                        <div class="wiki-img">🌍</div>
+                        <div class="wiki-title">Co-browsing</div>
+                        <div class="wiki-text">
+                            <b>Co-browsing</b> (short for <i>collaborative browsing</i>) is the practice of navigating the <a>World Wide Web</a> together in real-time. Co-browsing allows multiple users to interact with the same web page simultaneously while each retaining control of their own cursor.<br><br>
+                            Originally developed for customer support, co-browsing has expanded into social use cases including <a>watch parties</a>, collaborative shopping, and shared research sessions.
                         </div>
                     </div>
 
-                    <!-- Timestamp -->
-                    <div class="mockup-timestamp">20:37</div>
+                    <!-- Amazon page -->
+                    <div class="mockup-page mockup-page-amazon" id="pageAmazon">
+                        <div class="amz-header">
+                            <div class="amz-logo">amazon</div>
+                            <div class="amz-search"></div>
+                        </div>
+                        <div class="amz-product">
+                            <div class="amz-img">🎧</div>
+                            <div>
+                                <div class="amz-title">Wireless Bluetooth Headphones<br>Active Noise Cancelling</div>
+                                <div class="amz-stars">★★★★☆ <span style="color:#555;font-size:8px">2,847</span></div>
+                                <div class="amz-price"><span>$</span>49<span>99</span></div>
+                                <div class="amz-btn">Add to Cart</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drawing overlay -->
+                    <div class="mockup-draw-overlay" id="drawOverlay">
+                        <svg viewBox="0 0 400 200" preserveAspectRatio="none">
+                            <path class="draw-stroke" d="M60,140 Q100,40 180,80 T300,60" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <path class="draw-stroke draw-stroke-2" d="M200,150 L260,100 L240,150 L300,100" stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <circle class="draw-stroke draw-stroke-3" cx="320" cy="55" r="15" stroke="#ef4444" stroke-width="2.5" fill="none"/>
+                        </svg>
+                    </div>
 
                     <!-- ── WeSurf floating panel (mimics real extension) ── -->
                     <div class="mockup-panel collapsed" id="mockupPanel">
@@ -1900,10 +2094,9 @@
                                 <div class="mockup-msg-av">🧑</div>
                                 <div class="mockup-msg-content">
                                     <span class="mockup-msg-name">Jordan</span>
-                                    <div class="mockup-bubble-other">He is so funny!</div>
+                                    <div class="mockup-bubble-other">Let me show you something</div>
                                     <div class="mockup-msg-react">
-                                        <span class="mockup-msg-react-pill own">😂 2</span>
-                                        <span class="mockup-msg-react-pill">👍 1</span>
+                                        <span class="mockup-msg-react-pill own">👍 2</span>
                                     </div>
                                 </div>
                             </div>
@@ -1912,7 +2105,7 @@
                                 <div class="mockup-msg-av">🧔</div>
                                 <div class="mockup-msg-content">
                                     <span class="mockup-msg-name">Rhonda</span>
-                                    <div class="mockup-bubble-other">Same 🔥</div>
+                                    <div class="mockup-bubble-other">Ooh get this one! 🎧</div>
                                 </div>
                             </div>
                         </div>
@@ -2148,33 +2341,73 @@
         // Animate chat messages in sequence with collapse/expand, then loop
         function animateChat() {
             const panel = document.getElementById('mockupPanel');
+            const urlBar = document.getElementById('mockupUrl');
             const msg1 = document.getElementById('msg1');
             const msg2 = document.getElementById('msg2');
             const msg3 = document.getElementById('msg3');
             const typing = document.getElementById('mockupTyping');
+            const drawOverlay = document.getElementById('drawOverlay');
+            const pageNetflix = document.getElementById('pageNetflix');
+            const pageWiki = document.getElementById('pageWiki');
+            const pageAmazon = document.getElementById('pageAmazon');
+            const sysMsg = document.querySelector('.mockup-system-msg');
+
+            function showPage(page, url, sysText) {
+                [pageNetflix, pageWiki, pageAmazon].forEach(p => p.classList.remove('active'));
+                page.classList.add('active');
+                urlBar.textContent = url;
+                if (sysText && sysMsg) { sysMsg.innerHTML = '<span class="sys-dot" style="background:#60a5fa"></span>' + sysText; }
+            }
+
+            function resetDraw() {
+                drawOverlay.classList.remove('active');
+                // Force re-trigger stroke animations
+                const svg = drawOverlay.querySelector('svg');
+                const clone = svg.cloneNode(true);
+                svg.parentNode.replaceChild(clone, svg);
+            }
+
             [msg1, msg2, msg3].forEach(m => m.classList.remove('show'));
             typing.classList.remove('show');
+            resetDraw();
 
-            // Start collapsed pill
+            // ── PHASE 1: Netflix (collapsed pill + drag + expand + chat) ──
             panel.classList.add('collapsed');
             panel.classList.remove('dragging');
+            showPage(pageNetflix, 'netflix.com/watch/brooklyn-nine-nine', 'Jordan joined the session');
+            if (sysMsg) sysMsg.querySelector('.sys-dot').style.background = '#22c55e';
 
-            // Drag pill to new position to show it's movable
-            setTimeout(() => panel.classList.add('dragging'), 600);
-            setTimeout(() => panel.classList.remove('dragging'), 1600);
+            setTimeout(() => panel.classList.add('dragging'), 500);
+            setTimeout(() => panel.classList.remove('dragging'), 1400);
+            setTimeout(() => panel.classList.remove('collapsed'), 2000);
 
-            // Expand panel
-            setTimeout(() => panel.classList.remove('collapsed'), 2200);
+            setTimeout(() => msg1.classList.add('show'), 2600);
+            setTimeout(() => msg2.classList.add('show'), 3400);
 
-            // Messages appear after expand
-            setTimeout(() => msg1.classList.add('show'), 2900);
-            setTimeout(() => msg2.classList.add('show'), 3800);
-            setTimeout(() => typing.classList.add('show'), 4600);
-            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 5400);
+            // ── PHASE 2: Switch to Wikipedia (co-browsing demo) ──
+            setTimeout(() => {
+                showPage(pageWiki, 'en.wikipedia.org/wiki/Co-browsing', 'Navigated to wikipedia.org');
+            }, 5000);
 
-            // Collapse again before loop
-            setTimeout(() => panel.classList.add('collapsed'), 8000);
-            setTimeout(animateChat, 9500);
+            setTimeout(() => typing.classList.add('show'), 5800);
+            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 6600);
+
+            // ── PHASE 3: Switch to Amazon + drawing ──
+            setTimeout(() => {
+                showPage(pageAmazon, 'amazon.com/dp/B09XYZ/wireless-headphones', 'Navigated to amazon.com');
+            }, 8500);
+
+            // Show drawing strokes
+            setTimeout(() => drawOverlay.classList.add('active'), 9500);
+
+            // ── PHASE 4: Collapse + loop ──
+            setTimeout(() => panel.classList.add('collapsed'), 12000);
+            setTimeout(() => {
+                showPage(pageNetflix, 'netflix.com/watch/brooklyn-nine-nine', 'Jordan joined the session');
+                if (sysMsg) sysMsg.querySelector('.sys-dot').style.background = '#22c55e';
+                resetDraw();
+            }, 12800);
+            setTimeout(animateChat, 13500);
         }
 
         // FAQ accordion
