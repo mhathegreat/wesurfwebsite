@@ -1302,6 +1302,38 @@
             to { stroke-dashoffset: 0; }
         }
 
+        /* Drawing cursor that follows strokes */
+        .mockup-draw-cursor {
+            position: absolute;
+            z-index: 4;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .mockup-draw-overlay.active .mockup-draw-cursor { opacity: 1; }
+
+        .draw-cursor-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: white;
+            border: 1.5px solid rgba(0,0,0,0.3);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .draw-cursor-label {
+            position: absolute;
+            top: 12px; left: 4px;
+            font-size: 7px;
+            font-weight: 600;
+            color: white;
+            background: rgba(59,130,246,0.85);
+            padding: 1px 5px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
         /* ── Features intro ── */
         .features-intro {
             text-align: center;
@@ -2021,10 +2053,14 @@
                     <!-- Drawing overlay -->
                     <div class="mockup-draw-overlay" id="drawOverlay">
                         <svg viewBox="0 0 400 200" preserveAspectRatio="none">
-                            <path class="draw-stroke" d="M60,140 Q100,40 180,80 T300,60" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round"/>
-                            <path class="draw-stroke draw-stroke-2" d="M200,150 L260,100 L240,150 L300,100" stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <path class="draw-stroke" id="drawPath1" d="M60,140 Q100,40 180,80 T300,60" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <path class="draw-stroke draw-stroke-2" id="drawPath2" d="M200,150 L260,100 L240,150 L300,100" stroke="#f59e0b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
                             <circle class="draw-stroke draw-stroke-3" cx="320" cy="55" r="15" stroke="#ef4444" stroke-width="2.5" fill="none"/>
                         </svg>
+                        <div class="mockup-draw-cursor" id="drawCursor">
+                            <div class="draw-cursor-dot"></div>
+                            <div class="draw-cursor-label">Jordan</div>
+                        </div>
                     </div>
 
                     <!-- ── WeSurf floating panel (mimics real extension) ── -->
@@ -2339,6 +2375,42 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // Animate chat messages in sequence with collapse/expand, then loop
+        // Animate cursor along SVG draw paths
+        function animateDrawCursor() {
+            const cursor = document.getElementById('drawCursor');
+            const overlay = document.getElementById('drawOverlay');
+            const svg = overlay.querySelector('svg');
+            const path1 = svg.querySelector('#drawPath1');
+            const path2 = svg.querySelector('#drawPath2');
+            if (!path1 || !path2 || !cursor) return;
+
+            const rect = overlay.getBoundingClientRect();
+            const svgW = 400, svgH = 200;
+
+            function svgToPixel(pt) {
+                return { x: (pt.x / svgW) * rect.width, y: (pt.y / svgH) * rect.height };
+            }
+
+            function moveCursorAlongPath(path, duration, startDelay) {
+                const len = path.getTotalLength();
+                const startTime = performance.now() + startDelay;
+                function step(now) {
+                    const t = Math.min((now - startTime) / duration, 1);
+                    if (t < 0) { requestAnimationFrame(step); return; }
+                    const pt = path.getPointAtLength(t * len);
+                    const px = svgToPixel(pt);
+                    cursor.style.left = px.x + 'px';
+                    cursor.style.top = px.y + 'px';
+                    if (t < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            // Follow path 1 (blue curve), then path 2 (orange zigzag)
+            moveCursorAlongPath(path1, 1500, 0);
+            moveCursorAlongPath(path2, 1500, 600);
+        }
+
         function animateChat() {
             const panel = document.getElementById('mockupPanel');
             const urlBar = document.getElementById('mockupUrl');
@@ -2397,8 +2469,11 @@
                 showPage(pageAmazon, 'amazon.com/dp/B09XYZ/wireless-headphones', 'Navigated to amazon.com');
             }, 8500);
 
-            // Show drawing strokes
-            setTimeout(() => drawOverlay.classList.add('active'), 9500);
+            // Show drawing strokes with cursor following
+            setTimeout(() => {
+                drawOverlay.classList.add('active');
+                animateDrawCursor();
+            }, 9500);
 
             // ── PHASE 4: Collapse + loop ──
             setTimeout(() => panel.classList.add('collapsed'), 12000);
