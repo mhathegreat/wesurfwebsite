@@ -740,7 +740,36 @@
             background: rgba(13,14,18,0.93);
             border-color: rgba(255,255,255,0.1);
             box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
+
+        /* Dragging state — pill moves to a different position */
+        .mockup-panel.collapsed.dragging {
+            bottom: 50%;
+            right: auto;
+            left: 12px;
+            cursor: grabbing;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 20px rgba(59,130,246,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+            transform: scale(1.08);
+        }
+
+        .mockup-drag-hint {
+            position: absolute;
+            bottom: 48px;
+            right: 4px;
+            font-size: 7px;
+            color: rgba(255,255,255,0.35);
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .mockup-panel.collapsed .mockup-drag-hint { opacity: 1; }
+        .mockup-panel.collapsed.dragging .mockup-drag-hint { opacity: 0; }
 
         .mockup-panel.collapsed .mp-body { opacity: 0; pointer-events: none; }
 
@@ -1811,6 +1840,7 @@
                             <div class="pill-logo">W</div>
                             <div class="pill-dot"></div>
                         </div>
+                        <div class="mockup-drag-hint">↕ drag me</div>
 
                         <div class="mp-body">
                         <!-- Header -->
@@ -2125,19 +2155,26 @@
             [msg1, msg2, msg3].forEach(m => m.classList.remove('show'));
             typing.classList.remove('show');
 
-            // Start collapsed, then expand
+            // Start collapsed pill
             panel.classList.add('collapsed');
-            setTimeout(() => panel.classList.remove('collapsed'), 800);
+            panel.classList.remove('dragging');
+
+            // Drag pill to new position to show it's movable
+            setTimeout(() => panel.classList.add('dragging'), 600);
+            setTimeout(() => panel.classList.remove('dragging'), 1600);
+
+            // Expand panel
+            setTimeout(() => panel.classList.remove('collapsed'), 2200);
 
             // Messages appear after expand
-            setTimeout(() => msg1.classList.add('show'), 1500);
-            setTimeout(() => msg2.classList.add('show'), 2400);
-            setTimeout(() => typing.classList.add('show'), 3200);
-            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 4000);
+            setTimeout(() => msg1.classList.add('show'), 2900);
+            setTimeout(() => msg2.classList.add('show'), 3800);
+            setTimeout(() => typing.classList.add('show'), 4600);
+            setTimeout(() => { typing.classList.remove('show'); msg3.classList.add('show'); }, 5400);
 
             // Collapse again before loop
-            setTimeout(() => panel.classList.add('collapsed'), 6500);
-            setTimeout(animateChat, 8000);
+            setTimeout(() => panel.classList.add('collapsed'), 8000);
+            setTimeout(animateChat, 9500);
         }
 
         // FAQ accordion
