@@ -242,7 +242,25 @@
             transition: color 0.2s;
         }
 
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0; right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
         .nav-link:hover { color: var(--text-main); }
+        .nav-link:hover::after { transform: scaleX(1); }
 
         .nav-center {
             display: flex;
@@ -494,9 +512,7 @@
 
         .faq-section .section-title { margin-bottom: 40px; }
 
-        .faq-item {
-            border-bottom: 1px solid var(--border);
-        }
+        /* faq-item styles moved to premium section */
 
         .faq-question {
             width: 100%;
@@ -1180,6 +1196,213 @@
             padding-bottom: 80px;
         }
 
+        /* ── Premium visual elements ── */
+
+        /* Gradient keyword highlights */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-light), #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Floating decorative orbs */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-orb-1 {
+            width: 120px; height: 120px;
+            background: rgba(0, 123, 255, 0.2);
+            top: 20%; right: 10%;
+            animation: float-orb 8s ease-in-out infinite;
+        }
+
+        .hero-orb-2 {
+            width: 80px; height: 80px;
+            background: rgba(99, 102, 241, 0.15);
+            top: 60%; left: 8%;
+            animation: float-orb 12s ease-in-out infinite reverse;
+        }
+
+        .hero-orb-3 {
+            width: 60px; height: 60px;
+            background: rgba(77, 173, 255, 0.18);
+            top: 35%; left: 20%;
+            animation: float-orb 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(15px, -20px); }
+            50% { transform: translate(-10px, 15px); }
+            75% { transform: translate(20px, 10px); }
+        }
+
+        /* CTA button shimmer */
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.12) 55%, transparent 60%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 48px;
+            color: rgba(255,255,255,0.25);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator svg {
+            animation: bounce-down 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce-down {
+            0%, 100% { transform: translateY(0); opacity: 0.4; }
+            50% { transform: translateY(8px); opacity: 0.8; }
+        }
+
+        /* Feature numbered badges */
+        .feature-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #0056b3);
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 4px 16px rgba(0, 123, 255, 0.35);
+            margin-bottom: 12px;
+        }
+
+        /* Feature image glow */
+        .feature-showcase-visual {
+            box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px rgba(0, 123, 255, 0.06);
+        }
+
+        .feature-showcase-visual:hover {
+            box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 60px rgba(0, 123, 255, 0.12);
+        }
+
+        /* Section label accent underline */
+        .section-label {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .section-label::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 2px;
+        }
+
+        .faq-section .section-label::after,
+        .how-section .section-label::after,
+        .features-intro .section-label::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* FAQ card styling */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0 20px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(77, 173, 255, 0.15);
+            background: rgba(28, 31, 35, 0.8);
+        }
+
+        .faq-item.open {
+            border-left-color: var(--primary);
+            background: rgba(28, 31, 35, 0.8);
+        }
+
+        /* How it Works tab glow */
+        .how-tab-btn.active {
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Better progress bar */
+        .how-tab-progress {
+            height: 4px;
+            box-shadow: 0 0 12px rgba(0, 123, 255, 0.15);
+        }
+
+        .how-tab-progress-bar {
+            box-shadow: 0 0 8px rgba(77, 173, 255, 0.4);
+        }
+
+        /* Decorative page orbs */
+        .page-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Better section divider */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(77,173,255,0.3), transparent);
+            box-shadow: 0 0 20px rgba(77, 173, 255, 0.1);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s;
+            margin-top: 16px;
+        }
+
+        .back-to-top:hover { color: var(--primary-light); }
+
+        .back-to-top svg {
+            transition: transform 0.2s;
+        }
+
+        .back-to-top:hover svg { transform: translateY(-2px); }
+
         /* Scroll reveal */
         .reveal {
             opacity: 0;
@@ -1304,7 +1527,10 @@
         <header class="hero">
             <div class="hero-aurora"></div>
             <div class="pill animate-up">✨ Now in Beta for Chrome</div>
-            <h1 class="animate-up delay-1">The whole internet,<br>now multiplayer.</h1>
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <h1 class="animate-up delay-1">The whole internet,<br><span class="text-gradient">now multiplayer.</span></h1>
             <p class="animate-up delay-2">The ultimate watch party and co-browsing extension. Sync videos, browse, shop, and do anything on the web together with friends in real-time.</p>
             <div class="animate-up delay-3">
                 <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" rel="noopener noreferrer" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Add to Chrome — It's Free</a>
@@ -1322,6 +1548,10 @@
                     <span class="trust-badge-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.5 9L10 3" stroke="#4dadff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     Works on Any Site
                 </div>
+            </div>
+            <div class="scroll-indicator animate-up delay-3">
+                <span>Scroll</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
         </header>
 
@@ -1457,7 +1687,9 @@
 
         <div class="section-divider"></div>
 
-        <div id="features">
+        <div id="features" style="position:relative">
+            <div class="page-orb" style="width:400px;height:400px;background:rgba(0,123,255,0.04);top:200px;right:-100px;"></div>
+            <div class="page-orb" style="width:300px;height:300px;background:rgba(99,102,241,0.03);top:800px;left:-80px;"></div>
             <div class="features-intro reveal">
                 <p class="section-label">Features</p>
                 <h2 class="section-title">Everything you need for the ultimate hangout</h2>
@@ -1466,7 +1698,8 @@
             <div class="feature-showcase reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">UNIVERSAL COMPATIBILITY</p>
-                    <h3>Watch and browse together on 30+ sites</h3>
+                    <div class="feature-badge">1</div>
+                    <h3>Watch and browse together on <span class="text-gradient">30+ streaming sites</span></h3>
                     <p>WeSurf isn't just for video — browse, shop, research, or explore any website together in real-time. Plus sync Netflix, YouTube, Disney+, Max, Twitch, and 25+ streaming sites with frame-perfect video playback.</p>
                 </div>
                 <div class="feature-showcase-visual">
@@ -1477,7 +1710,8 @@
             <div class="feature-showcase reverse reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">BUILT-IN VOICE & CHAT</p>
-                    <h3>Talk while you watch</h3>
+                    <div class="feature-badge">2</div>
+                    <h3><span class="text-gradient">Talk</span> while you watch</h3>
                     <p>Voice chat, text messages, emoji reactions, and typing indicators — all built into a sleek sidebar that works even in fullscreen. No need to switch tabs or open another app.</p>
                 </div>
                 <div class="feature-showcase-visual">
@@ -1488,7 +1722,8 @@
             <div class="feature-showcase reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">INTERACTIVE</p>
-                    <h3>Draw and react in real-time</h3>
+                    <div class="feature-badge">3</div>
+                    <h3><span class="text-gradient">Draw and react</span> in real-time</h3>
                     <p>Doodle on screen with the drawing canvas, send floating emoji reactions that animate across the page, and react to messages — whether you're watching a movie or shopping together. Only on WeSurf.</p>
                 </div>
                 <div class="feature-showcase-visual">
@@ -1499,7 +1734,8 @@
             <div class="feature-showcase reverse reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">HOST CONTROLS</p>
-                    <h3>Your party, your rules</h3>
+                    <div class="feature-badge">4</div>
+                    <h3>Your party, <span class="text-gradient">your rules</span></h3>
                     <p>Lock navigation so only you control the page. Share a simple 6-character room code to invite friends instantly — no accounts, no sign-ups, no friction.</p>
                 </div>
                 <div class="feature-showcase-visual">
@@ -1639,6 +1875,10 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 WeSurf. Built for friends on the internet.</p>
+            <a href="#" class="back-to-top">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 9l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Back to top
+            </a>
         </div>
     </footer>
 
