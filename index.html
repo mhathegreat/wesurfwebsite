@@ -165,7 +165,16 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; scroll-snap-type: y proximity; }
+
+        .snap-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 80px;
+        }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
         a, button, [role="button"], .feature-card, .screenshot-item, .faq-question { cursor: pointer; }
         * { -webkit-tap-highlight-color: transparent; }
@@ -1256,6 +1265,8 @@
                 gap: 12px;
             }
             nav.nav-open .nav-center { display: flex; }
+            html { scroll-snap-type: none; }
+            .snap-section { min-height: auto; scroll-snap-align: none; padding-top: 0; display: block; }
             .nav-cta { display: none; }
             .feature-showcase, .feature-showcase.reverse { flex-direction: column; gap: 32px; padding: 48px 5%; }
             .feature-showcase-text p { max-width: 100%; }
@@ -1296,6 +1307,7 @@
     </nav>
 
     <main>
+        <div class="snap-section" style="padding-top:0">
         <header class="hero">
             <div class="hero-aurora"></div>
             <div class="pill animate-up">✨ Now in Beta for Chrome</div>
@@ -1353,7 +1365,9 @@
                 </div>
             </div>
         </div>
+        </div>
 
+        <div class="snap-section">
         <section class="demo-container animate-up delay-3">
             <div class="mockup-wrapper">
                 <!-- Browser chrome -->
@@ -1449,12 +1463,14 @@
                 </div>
             </div>
         </section>
+        </div>
 
         <div class="section-divider"></div>
 
         <div id="features">
             <h2 class="sr-only">Features</h2>
 
+            <div class="snap-section">
             <div class="feature-showcase reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">UNIVERSAL COMPATIBILITY</p>
@@ -1465,7 +1481,9 @@
                     <img src="screenshot-video.jpeg" alt="Perfectly synced video playback with WeSurf on Netflix" loading="lazy">
                 </div>
             </div>
+            </div>
 
+            <div class="snap-section">
             <div class="feature-showcase reverse reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">BUILT-IN VOICE & CHAT</p>
@@ -1476,7 +1494,9 @@
                     <img src="screenshot-panel.jpg" alt="WeSurf voice chat and text messaging panel" loading="lazy">
                 </div>
             </div>
+            </div>
 
+            <div class="snap-section">
             <div class="feature-showcase reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">INTERACTIVE</p>
@@ -1487,7 +1507,9 @@
                     <img src="screenshot-browse.jpeg" alt="WeSurf co-browsing with drawing and reactions" loading="lazy">
                 </div>
             </div>
+            </div>
 
+            <div class="snap-section">
             <div class="feature-showcase reverse reveal">
                 <div class="feature-showcase-text">
                     <p class="section-label">HOST CONTROLS</p>
@@ -1502,8 +1524,10 @@
             <div class="features-cta reveal">
                 <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" rel="noopener noreferrer" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Try WeSurf — It's Free</a>
             </div>
+            </div>
         </div>
 
+        <div class="snap-section">
         <section class="faq-section" id="faq">
             <p class="section-label reveal">FAQ</p>
             <h2 class="section-title reveal">Common questions</h2>
@@ -1548,7 +1572,9 @@
                 <div class="faq-answer"><p>There's no hard limit — invite as many friends as you like. The more the merrier.</p></div>
             </div>
         </section>
+        </div>
 
+        <div class="snap-section">
         <section class="how-section section-alt" id="how-it-works">
             <p class="section-label reveal">How it works</p>
             <h2 class="section-title reveal">Up and running in 30 seconds</h2>
@@ -1598,12 +1624,15 @@
                 </div>
             </div>
         </section>
+        </div>
 
+        <div class="snap-section">
         <section class="cta-section reveal">
             <h2>Ready to surf together?</h2>
             <p>Free forever. No account needed. Just install and invite your friends.</p>
             <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" rel="noopener noreferrer" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Add to Chrome — It's Free</a>
         </section>
+        </div>
     </main>
 
     <footer>
