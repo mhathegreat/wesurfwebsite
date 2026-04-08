@@ -510,7 +510,7 @@
             text-align: center;
         }
 
-        .faq-section .section-title { margin-bottom: 40px; }
+        .faq-section .section-title { margin-bottom: 48px; }
 
         /* faq-item styles moved to premium section */
 
@@ -1361,10 +1361,10 @@
         .feature-showcase-text h3 {
             font-size: clamp(26px, 3vw, 40px);
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
             margin-bottom: 20px;
             line-height: 1.15;
-            background: linear-gradient(180deg, #ffffff 0%, #c4c4cc 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1563,15 +1563,8 @@
             50% { box-shadow: 0 0 0 1px rgba(255,255,255,0.15) inset, 0 8px 40px rgba(0,123,255,0.5), 0 0 60px rgba(0,123,255,0.15); }
         }
 
-        .cta-section h2 {
-            font-size: clamp(28px, 4vw, 42px);
-            font-weight: 800;
-            letter-spacing: -1px;
+        .cta-section .section-title {
             margin-bottom: 16px;
-            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .cta-section p {
@@ -1609,21 +1602,14 @@
         .suggest-card .section-label { text-align: center; }
         .suggest-card .section-label::after { left: 50%; transform: translateX(-50%); }
 
-        .suggest-card h2 {
-            font-size: clamp(22px, 3vw, 30px);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 8px;
-            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .suggest-card .section-title {
+            margin-bottom: 12px;
         }
 
         .suggest-card > p {
             text-align: center;
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 15px;
             margin-bottom: 32px;
         }
 
@@ -2493,7 +2479,7 @@
         <section class="suggest-section reveal" id="suggest">
             <div class="suggest-card">
                 <p class="section-label">We're listening</p>
-                <h2>Request a Feature</h2>
+                <h2 class="section-title">Request a Feature</h2>
                 <p>Got an idea that would make WeSurf better? We'd love to hear it.</p>
 
                 <form class="suggest-form" id="suggestForm" action="https://formspree.io/f/xojpbzko" method="POST">
@@ -2529,7 +2515,7 @@
         </section>
 
         <section class="cta-section reveal">
-            <h2>Ready to surf together?</h2>
+            <h2 class="section-title">Ready to surf together?</h2>
             <p>Free forever. No account needed. Just install and invite your friends.</p>
             <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" target="_blank" rel="noopener noreferrer" class="btn-primary"><svg width="20" height="20" viewBox="0 0 256 256" style="margin-right:10px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="128" fill="#fff"/><path d="M128 80a48 48 0 1 1 0 96 48 48 0 0 1 0-96z" fill="#1a73e8"/><path d="M80 128A48 48 0 0 1 128 80h96.5A128 128 0 1 0 34.2 192z" fill="#ea4335"/><path d="M128 176a48 48 0 0 1-41.6-24L44.2 80A128 128 0 0 0 255.9 136H128z" fill="#34a853"/><path d="M128 80h96.5a128 128 0 0 0-220.7 0z" fill="#fbbc04"/><circle cx="128" cy="128" r="40" fill="#1a73e8"/></svg>Add to Chrome — It's Free</a>
         </section>
