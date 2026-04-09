@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to WeSurf!</title>
+    <meta name="description" content="You've installed WeSurf! Learn how to start browsing and watching together with friends.">
+    <link rel="icon" type="image/png" href="icon128.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090a0c;
+            --bg-card: rgba(28, 31, 35, 0.6);
+            --primary: #007bff;
+            --primary-light: #4dadff;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px;
+            background-image:
+                radial-gradient(circle at 50% -10%, rgba(77, 173, 255, 0.18), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 123, 255, 0.06), transparent 50%);
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes checkPop { 0% { transform: scale(0); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+        .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; text-decoration: none; }
+        .logo img { width: 36px; height: 36px; border-radius: 8px; }
+        .logo span { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+
+        .hero { text-align: center; margin-bottom: 40px; animation: fadeUp 0.5s ease forwards; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #4ade80; font-size: 12px; font-weight: 600;
+            padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+        }
+        .hero-badge svg { animation: checkPop 0.4s ease 0.3s both; }
+        .hero h1 { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; line-height: 1.2; }
+        .hero h1 span { background: linear-gradient(90deg, #fff 30%, var(--primary-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 15px; color: var(--text-muted); max-width: 420px; margin: 0 auto; line-height: 1.6; }
+
+        .steps {
+            display: flex; gap: 16px; margin-bottom: 40px; width: 100%; max-width: 640px;
+            animation: fadeUp 0.5s ease 0.15s both;
+        }
+        .step {
+            flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 20px; text-align: center;
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        }
+        .step-num {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #0056b3);
+            color: #fff; font-size: 13px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 12px;
+        }
+        .step-icon { font-size: 24px; margin-bottom: 8px; }
+        .step h3 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+        .step p { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+        .features {
+            display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+            margin-bottom: 40px; animation: fadeUp 0.5s ease 0.3s both;
+        }
+        .feature-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 100px;
+            font-size: 12px; font-weight: 600; color: var(--text-muted);
+        }
+
+        .cta {
+            text-align: center; animation: fadeUp 0.5s ease 0.45s both;
+        }
+        .cta p {
+            font-size: 14px; color: var(--text-muted); margin-bottom: 6px;
+        }
+        .cta .arrow {
+            font-size: 24px; margin-bottom: 8px; animation: float 2s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        .cta-hint {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2);
+            padding: 10px 20px; border-radius: 12px;
+            font-size: 13px; font-weight: 600; color: var(--primary-light);
+        }
+
+        @media (max-width: 600px) {
+            .steps { flex-direction: column; }
+            .hero h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="logo">
+        <img src="icon128.png" alt="WeSurf">
+        <span>WeSurf</span>
+    </a>
+
+    <div class="hero">
+        <div class="hero-badge" id="install-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Extension installed
+        </div>
+        <h1><span>You're all set!</span></h1>
+        <p>WeSurf lets you browse any website and watch videos together in perfect sync. Here's how to get started.</p>
+    </div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-icon">🧩</div>
+            <h3>Click the WeSurf icon</h3>
+            <p>Find it in your browser toolbar (top-right). Pin it for easy access.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-icon">🚀</div>
+            <h3>Start a session</h3>
+            <p>Click "Start Session" to create a room, or enter a friend's code to join theirs.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-icon">🔗</div>
+            <h3>Share your link</h3>
+            <p>Copy your invite link and send it. Your friend joins instantly.</p>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="feature-pill">🎬 Video Sync</div>
+        <div class="feature-pill">🎙️ Voice Chat</div>
+        <div class="feature-pill">✏️ Live Drawing</div>
+        <div class="feature-pill">🎉 Reactions</div>
+        <div class="feature-pill">🖱️ Shared Cursors</div>
+    </div>
+
+    <div class="cta">
+        <div class="arrow">👆</div>
+        <p>Click the WeSurf icon in your toolbar to begin</p>
+        <div class="cta-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Tip: Right-click the icon and select "Pin" for quick access
+        </div>
+    </div>
+</body>
+</html>
