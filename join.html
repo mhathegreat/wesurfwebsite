@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Room — WeSurf</title>
+    <meta name="description" content="Join a WeSurf co-browsing session. Watch videos and browse the web together in real-time.">
+    <link rel="icon" type="image/png" href="icon128.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090a0c;
+            --bg-card: rgba(28, 31, 35, 0.6);
+            --primary: #007bff;
+            --primary-light: #4dadff;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background-image:
+                radial-gradient(circle at 50% -20%, rgba(77, 173, 255, 0.15), transparent 50%),
+                radial-gradient(circle at 100% 50%, rgba(0, 123, 255, 0.05), transparent 50%);
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+            text-decoration: none;
+        }
+        .logo img { width: 36px; height: 36px; border-radius: 8px; }
+        .logo span { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            width: 100%;
+            max-width: 420px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            animation: fadeUp 0.4s ease forwards;
+            text-align: center;
+        }
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--primary-light);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 24px auto;
+        }
+        .room-code {
+            font-family: monospace;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: #fff;
+            margin: 16px 0 8px;
+        }
+        .room-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .room-site {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            padding: 5px 12px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+        .room-site img {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(0, 123, 255, 0.35);
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0, 123, 255, 0.5); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 10px 16px;
+            margin-top: 10px;
+        }
+        .btn-secondary:hover { color: #fff; border-color: rgba(255,255,255,0.2); }
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0;
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+        .error-icon { font-size: 40px; margin-bottom: 12px; }
+        .title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+        .subtitle { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        #state-loading, #state-room, #state-error, #state-no-room { display: none; }
+        .install-note {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="logo">
+        <img src="icon128.png" alt="WeSurf">
+        <span>WeSurf</span>
+    </a>
+
+    <div class="card">
+        <!-- Loading -->
+        <div id="state-loading">
+            <div class="title">Finding room...</div>
+            <div class="spinner"></div>
+        </div>
+
+        <!-- No room param -->
+        <div id="state-no-room">
+            <div class="error-icon">🔗</div>
+            <div class="title">Invalid Link</div>
+            <p class="subtitle">This link doesn't contain a room code. Ask your friend for a new invite link.</p>
+            <a href="/" class="btn btn-secondary" style="margin-top:20px;">Go to Homepage</a>
+        </div>
+
+        <!-- Room expired -->
+        <div id="state-error">
+            <div class="error-icon">👋</div>
+            <div class="title">Room has ended</div>
+            <p class="subtitle">Everyone has left this session. Ask your friend to start a new one.</p>
+            <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" class="btn btn-primary" style="margin-top:20px;">Install WeSurf</a>
+            <a href="/" class="btn btn-secondary">Go to Homepage</a>
+        </div>
+
+        <!-- Room active -->
+        <div id="state-room">
+            <div class="title">You're invited!</div>
+            <div class="room-code" id="room-code"></div>
+            <div class="room-meta" id="room-meta"></div>
+            <div class="room-site" id="room-site" style="display:none;"></div>
+
+            <div id="join-section">
+                <button class="btn btn-primary" id="join-btn" onclick="joinRoom()">Join Room</button>
+                <div class="divider">don't have the extension?</div>
+                <a href="https://chromewebstore.google.com/detail/wesurf/hmhbfgbbehoipcaeonbllecjdinpnlnd" class="btn btn-secondary" id="install-btn">Install WeSurf — it's free</a>
+                <p class="install-note">After installing, come back to this page and click "Join Room".</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SERVER = 'https://wesurf-server-production-26d3.up.railway.app';
+        const params = new URLSearchParams(window.location.search);
+        const roomId = (params.get('room') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 6);
+
+        let roomData = null;
+
+        function show(id) {
+            ['state-loading', 'state-room', 'state-error', 'state-no-room'].forEach(s => {
+                document.getElementById(s).style.display = s === id ? 'block' : 'none';
+            });
+        }
+
+        function joinRoom() {
+            if (!roomData) return;
+            const target = roomData.lastUrl || 'https://www.google.com';
+            const url = new URL(target);
+            url.searchParams.set('wesurf_room', roomId);
+            window.location.href = url.toString();
+        }
+
+        async function init() {
+            if (!roomId) { show('state-no-room'); return; }
+
+            show('state-loading');
+
+            try {
+                const res = await fetch(`${SERVER}/api/room/${roomId}`);
+                const data = await res.json();
+
+                if (!data.exists) { show('state-error'); return; }
+
+                roomData = data;
+                document.getElementById('room-code').textContent = roomId;
+
+                const count = data.userCount || 0;
+                document.getElementById('room-meta').textContent =
+                    count === 1 ? '1 person browsing' : `${count} people browsing`;
+
+                if (data.lastUrl) {
+                    try {
+                        const domain = new URL(data.lastUrl).hostname.replace('www.', '');
+                        const siteEl = document.getElementById('room-site');
+                        siteEl.innerHTML = `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt=""> ${domain}`;
+                        siteEl.style.display = 'inline-flex';
+                    } catch(e) {}
+                }
+
+                show('state-room');
+
+                // Detect extension after a short delay
+                setTimeout(() => {
+                    if (document.documentElement.hasAttribute('data-wesurf-installed')) {
+                        // Extension is installed — auto-focus the join button
+                        document.getElementById('join-btn').focus();
+                    }
+                }, 600);
+
+            } catch(e) {
+                show('state-error');
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
