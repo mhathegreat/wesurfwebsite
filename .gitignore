@@ -1,0 +1,12 @@
+# Claude Code session worktrees / sandboxes
+.claude/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Local env files
+.env
+.env.local

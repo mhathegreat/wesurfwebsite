@@ -200,7 +200,7 @@
     </div>
 
     <script>
-        const SERVER = 'https://wesurftest-production.up.railway.app';
+        const SERVER = 'https://api.wesurf.live';
         const params = new URLSearchParams(window.location.search);
         const roomId = (params.get('room') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').substring(0, 6);
 
@@ -214,7 +214,17 @@
 
         function joinRoom() {
             if (!roomData) return;
-            const target = roomData.lastUrl || 'https://www.google.com';
+            // Only allow http/https targets — defends against javascript: / data: URLs
+            // that a malicious host could smuggle through the room's lastUrl.
+            let target = roomData.lastUrl || 'https://www.google.com';
+            try {
+                const u = new URL(target);
+                if (u.protocol !== 'http:' && u.protocol !== 'https:') {
+                    target = 'https://www.google.com';
+                }
+            } catch (e) {
+                target = 'https://www.google.com';
+            }
             const url = new URL(target);
             url.searchParams.set('wesurf_room', roomId);
             window.location.href = url.toString();
@@ -225,8 +235,12 @@
 
             show('state-loading');
 
+            // 8s timeout so the page doesn't hang on "Finding room..." if the backend is unreachable.
+            const ac = new AbortController();
+            const timer = setTimeout(() => ac.abort(), 8000);
             try {
-                const res = await fetch(`${SERVER}/api/room/${roomId}`);
+                const res = await fetch(`${SERVER}/api/room/${roomId}`, { signal: ac.signal });
+                clearTimeout(timer);
                 const data = await res.json();
 
                 if (!data.exists) { show('state-error'); return; }
@@ -242,7 +256,15 @@
                     try {
                         const domain = new URL(data.lastUrl).hostname.replace('www.', '');
                         const siteEl = document.getElementById('room-site');
-                        siteEl.innerHTML = `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" alt=""> ${domain}`;
+                        // Build via DOM APIs instead of innerHTML so the domain string can never
+                        // be parsed as HTML (defense in depth — hostname normalisation already
+                        // restricts charset, but the createElement path eliminates the class).
+                        siteEl.replaceChildren();
+                        const img = document.createElement('img');
+                        img.src = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=32';
+                        img.alt = '';
+                        siteEl.appendChild(img);
+                        siteEl.appendChild(document.createTextNode(' ' + domain));
                         siteEl.style.display = 'inline-flex';
                     } catch(e) {}
                 }
@@ -258,6 +280,7 @@
                 }, 600);
 
             } catch(e) {
+                clearTimeout(timer);
                 show('state-error');
             }
         }
